@@ -64,12 +64,21 @@ class DatabaseHandler:
             print("Tables created successfully.")
             conn.close()
         except sqlite3.Error as e:
-            print(e)
+            return e
 
 
-    def add_category(self, catgory: str):
+    def add_genre(self, genre: str):
         # input SQL command to insert new category
         print('add_category')
 
+    def add_author(self, author: str):
+        print("Author added successfully.")
+
     def add_book(self, book_name: str, category_id: int):
         print('add_book')
+
+    def add_user(self, user: str):
+        print("User added successfully.")
+
+    def add_loan(self, loan: str):
+        print("Loan added successfully.")
