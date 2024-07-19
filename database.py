@@ -81,15 +81,15 @@ class DatabaseHandler:
         except sqlite3.Error as e:
             return e
 
-    # def remove_genre(self, genreName: str):
-    #     try:
-    #         self._conn = conn
-    #         self._conn.execute('DELETE FROM Genre WHERE GenreName = ?', (genreName,))
-    #         self._conn.commit()
-    #         self._conn.close()
-    #         print(f"Genre '{genreName}' removed successfully.")
-    #     except sqlite3.Error as e:
-    #         return e
+    def remove_genre(self, genreName: str):
+        try:
+            self._conn = conn
+            self._conn.execute('DELETE FROM Genre WHERE GenreName = ?', (genreName,))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Genre '{genreName}' removed successfully.")
+        except sqlite3.Error as e:
+            return e
 
 
     # def update_genre(self, genreID: int):
