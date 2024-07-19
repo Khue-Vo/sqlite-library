@@ -134,8 +134,16 @@ class DatabaseHandler:
     # def update_book(self, bookID: int):
     #     print("Book updated successfully.")
     #
-    def add_user(self, user: str):
-        print("User added successfully.")
+    def add_user(self, userName: List[str], address: str, email: str, phone_num: str):
+        try:
+            self._conn = conn
+            self._conn.execute('INSERT INTO User (FirstName, LastName, Address, Email, PhoneNumber) VALUES (?,?,?,?,?)', (userName[0], userName[1], address, email, phone_num))
+            self._conn.commit()
+            self._conn.close()
+            fullname = " ".join(userName)
+            print(f"User '{fullname}' added successfully.")
+        except sqlite3.Error as e:
+            return e
 
     def remove_user(self, userName: str):
         print("User removed successfully.")
