@@ -95,16 +95,16 @@ class DatabaseHandler:
     # def update_genre(self, genreID: int):
     #     print("Genre updated successfully.")
     #
-    # def add_author(self, author: List[str]):
-    #     try:
-    #         self._conn = conn
-    #         self._conn.execute('INSERT INTO Author (FirstName, LastName) VALUES (?,?)', (author[0], author[1],))
-    #         self._conn.commit()
-    #         self._conn.close()
-    #         print(f"Author '{author}' added successfully.")
-    #     except sqlite3.Error as e:
-    #         return e
-    #
+    def add_author(self, author: List[str]):
+        try:
+            self._conn = conn
+            self._conn.execute('INSERT INTO Author (FirstName, LastName) VALUES (?,?)', (author[0], author[1],))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Author '{author}' added successfully.")
+        except sqlite3.Error as e:
+            return e
+
     # def remove_author(self, author: List[str]):
     #     try:
     #         self._conn = conn
