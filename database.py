@@ -95,10 +95,10 @@ class DatabaseHandler:
     # def update_genre(self, genreID: int):
     #     print("Genre updated successfully.")
     #
-    def add_author(self, author: List[str]):
+    def add_author(self, author: List[str], birth: str):
         try:
             self._conn = conn
-            self._conn.execute('INSERT INTO Author (FirstName, LastName) VALUES (?,?)', (author[0], author[1],))
+            self._conn.execute('INSERT INTO Author (FirstName, LastName, Birthday) VALUES (?,?,?)', (author[0], author[1],birth))
             self._conn.commit()
             self._conn.close()
             print(f"Author '{author}' added successfully.")
@@ -119,6 +119,14 @@ class DatabaseHandler:
     #     print("Author updated successfully.")
     #
     def add_book(self, book_name: str, category_id: int):
+        try:
+            self._conn = conn
+            self._conn.execute('INSERT INTO Author (FirstName, LastName) VALUES (?,?)', (author[0], author[1],))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Book '{author}' added successfully.")
+        except sqlite3.Error as e:
+            return e
         print('add_book')
 
     def remove_book(self, bookTitle: str):
