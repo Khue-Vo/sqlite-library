@@ -178,8 +178,15 @@ class DatabaseHandler:
         except sqlite3.Error as e:
             return e
 
-    def remove_loan(self, loanID: int):
-        print("Loan removed successfully.")
+    def remove_loan(self, book_id: int, user_id: int):
+        try:
+            self._conn = conn
+            self._conn.execute('DELETE FROM Loan WHERE Book_ID = ? AND User_ID = ?', (book_id, user_id,))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Loan removed successfully.")
+        except sqlite3.Error as e:
+            return e
 
     # def update_loan(self, loanID: int):
     #     print("Loan updated successfully.")
