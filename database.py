@@ -131,7 +131,14 @@ class DatabaseHandler:
             return e
 
     def remove_book(self, bookTitle: str):
-        print("Book removed successfully.")
+        try:
+            self._conn = conn
+            self._conn.execute('DELETE FROM Book WHERE Title = ?', (bookTitle,))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Book '{bookTitle}' removed successfully.")
+        except sqlite3.Error as e:
+            return e
 
     # def update_book(self, bookID: int):
     #     print("Book updated successfully.")
