@@ -101,7 +101,8 @@ class DatabaseHandler:
             self._conn.execute('INSERT INTO Author (FirstName, LastName, Birthday) VALUES (?,?,?)', (author[0], author[1],birth))
             self._conn.commit()
             self._conn.close()
-            print(f"Author '{author}' added successfully.")
+            fullname = " ".join(author)
+            print(f"Author '{fullname}' added successfully.")
         except sqlite3.Error as e:
             return e
 
