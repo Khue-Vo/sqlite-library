@@ -118,16 +118,15 @@ class DatabaseHandler:
     # def update_author(self, authorID: int):
     #     print("Author updated successfully.")
     #
-    def add_book(self, book_name: str, category_id: int):
+    def add_book(self, book_title: str, genre_id: int, series: str, author_id: int):
         try:
             self._conn = conn
-            self._conn.execute('INSERT INTO Author (FirstName, LastName) VALUES (?,?)', (author[0], author[1],))
+            self._conn.execute('INSERT INTO Book (Title, Genre_ID, Series, Author_ID) VALUES (?,?,?,?)', (book_title, genre_id, series, author_id))
             self._conn.commit()
             self._conn.close()
-            print(f"Book '{author}' added successfully.")
+            print(f"Book '{book_title}' added successfully.")
         except sqlite3.Error as e:
             return e
-        print('add_book')
 
     def remove_book(self, bookTitle: str):
         print("Book removed successfully.")
