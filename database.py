@@ -98,7 +98,7 @@ class DatabaseHandler:
     def add_author(self, author: List[str], birth: str):
         try:
             self._conn = conn
-            self._conn.execute('INSERT INTO Author (FirstName, LastName, Birthday) VALUES (?,?,?)', (author[0], author[1],birth))
+            self._conn.execute('INSERT INTO Author (FirstName, LastName, Birthday) VALUES (?,?,?)', (author[0], author[1], birth,))
             self._conn.commit()
             self._conn.close()
             fullname = " ".join(author)
@@ -122,7 +122,7 @@ class DatabaseHandler:
     def add_book(self, book_title: str, genre_id: int, series: str, author_id: int):
         try:
             self._conn = conn
-            self._conn.execute('INSERT INTO Book (Title, Genre_ID, Series, Author_ID) VALUES (?,?,?,?)', (book_title, genre_id, series, author_id))
+            self._conn.execute('INSERT INTO Book (Title, Genre_ID, Series, Author_ID) VALUES (?,?,?,?)', (book_title, genre_id, series, author_id,))
             self._conn.commit()
             self._conn.close()
             print(f"Book '{book_title}' added successfully.")
@@ -138,7 +138,7 @@ class DatabaseHandler:
     def add_user(self, userName: List[str], address: str, email: str, phone_num: str):
         try:
             self._conn = conn
-            self._conn.execute('INSERT INTO User (FirstName, LastName, Address, Email, PhoneNumber) VALUES (?,?,?,?,?)', (userName[0], userName[1], address, email, phone_num))
+            self._conn.execute('INSERT INTO User (FirstName, LastName, Address, Email, PhoneNumber) VALUES (?,?,?,?,?)', (userName[0], userName[1], address, email, phone_num,))
             self._conn.commit()
             self._conn.close()
             fullname = " ".join(userName)
@@ -152,8 +152,15 @@ class DatabaseHandler:
     # def update_user(self, userID: int):
     #     print("User updated successfully.")
     #
-    def add_loan(self, loan: str):
-        print("Loan added successfully.")
+    def add_loan(self, book_id: int, user_id: int, return_day: str):
+        try:
+            self._conn = conn
+            self._conn.execute('INSERT INTO Loan (Book_ID, User_ID, ReturnDay) VALUES (?,?,?)', (book_id, user_id, return_day,))
+            self._conn.commit()
+            self._conn.close()
+            print(f"Loan added successfully.")
+        except sqlite3.Error as e:
+            return e
 
     def remove_loan(self, loanID: int):
         print("Loan removed successfully.")
