@@ -106,15 +106,16 @@ class DatabaseHandler:
         except sqlite3.Error as e:
             return e
 
-    # def remove_author(self, author: List[str]):
-    #     try:
-    #         self._conn = conn
-    #         self._conn.execute('DELETE FROM Genre WHERE FirstName = ? AND LastName = ?', (author[0], author[1],))
-    #         self._conn.commit()
-    #         self._conn.close()
-    #         print(f"Author '{author}' removed successfully.")
-    #     except sqlite3.Error as e:
-    #         return e
+    def remove_author(self, author: List[str]):
+        try:
+            self._conn = conn
+            self._conn.execute('DELETE FROM Genre WHERE FirstName = ? AND LastName = ?', (author[0], author[1],))
+            self._conn.commit()
+            self._conn.close()
+            fullname = " ".join(author)
+            print(f"Author '{fullname}' removed successfully.")
+        except sqlite3.Error as e:
+            return e
 
     # def update_author(self, authorID: int):
     #     print("Author updated successfully.")
