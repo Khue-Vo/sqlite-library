@@ -109,7 +109,7 @@ class DatabaseHandler:
     def remove_author(self, author: List[str]):
         try:
             self._conn = conn
-            self._conn.execute('DELETE FROM Genre WHERE FirstName = ? AND LastName = ?', (author[0], author[1],))
+            self._conn.execute('DELETE FROM Author WHERE FirstName = ? AND LastName = ?', (author[0], author[1],))
             self._conn.commit()
             self._conn.close()
             fullname = " ".join(author)
@@ -154,8 +154,16 @@ class DatabaseHandler:
         except sqlite3.Error as e:
             return e
 
-    def remove_user(self, userName: str):
-        print("User removed successfully.")
+    def remove_user(self, userName: List[str]):
+        try:
+            self._conn = conn
+            self._conn.execute('DELETE FROM User WHERE FirstName = ? AND LastName = ?', (userName[0], userName[1],))
+            self._conn.commit()
+            self._conn.close()
+            fullname = " ".join(userName)
+            print(f"User '{fullname}' removed successfully.")
+        except sqlite3.Error as e:
+            return e
 
     # def update_user(self, userID: int):
     #     print("User updated successfully.")
