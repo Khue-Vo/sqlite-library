@@ -99,24 +99,24 @@ def add_user(
         raise typer.Exit()
 
 
-# @app.command()
-# def add_loan(
-#         title: str = typer.Option(..., prompt="Book Title"),
-#         user: str = typer.Option(..., prompt="User's Name"),
-#         loan_day: str = typer.Option(..., prompt="Loan Day"),
-#         due_day: str = typer.Option(..., prompt="Due Day"),
-# ) -> None:
-#     """Add loan information into the library database."""
-#     try:
-#         get_database()
-#         lib.add_loan(title, user, loan_day, due_day)
-#         typer.secho(f"Loan added successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error adding loan into the database: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+@app.command()
+def add_loan(
+        title: str = typer.Option(..., prompt="Book Title"),
+        user: str = typer.Option(..., prompt="User's Name"),
+        loan_day: str = typer.Option(..., prompt="Loan Day"),
+        due_day: str = typer.Option(..., prompt="Due Day"),
+) -> None:
+    """Add loan information into the library database."""
+    try:
+        get_database()
+        lib.add_loan(title, user, loan_day, due_day)
+        typer.secho(f"Loan added successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error adding loan into the database: {e}.", fg=typer.colors.RED)
+        lib.rollback()
+        raise typer.Exit()
+
+
 # @app.command()
 # def update_genre(genre_id: int = typer.Option(..., prompt="Genre's ID"),
 #                  info: str = typer.Option(..., prompt="New genre")) -> None:

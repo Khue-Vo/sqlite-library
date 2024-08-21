@@ -135,17 +135,17 @@ class DatabaseHandler:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def add_loan(self, book_id: int, user_id: int, loan_day: str, due_day: str):
-#         try:
-#             with self._conn:
-#                 query = 'INSERT INTO Loan (Book_ID, User_ID, LoanDate, DueDate) VALUES (?,?,?,?)'
-#                 params = (book_id, user_id, loan_day, due_day)
-#                 self._conn.execute(query, params)
-#                 self._conn.commit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def add_loan(self, book_id: int, user_id: int, loan_day: str, due_day: str):
+        try:
+            with self._conn:
+                query = 'INSERT INTO Loan (Book_ID, User_ID, LoanDate, DueDate) VALUES (?,?,?,?)'
+                params = (book_id, user_id, loan_day, due_day)
+                self._conn.execute(query, params)
+                self._conn.commit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def update_genre(self, genre_id: int, new_info: str):
 #         try:
 #             with self._conn:
@@ -510,29 +510,29 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def get_book_id(self, book_title: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('SELECT Book_ID FROM Book WHERE Title = ?', (book_title,))
-#                 book_id = cursor.fetchone()
-#                 return book_id
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_user_id(self, first_name: str, last_name: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 query = 'SELECT User_ID FROM User WHERE FirstName = ? AND LastName = ?'
-#                 params = (first_name, last_name)
-#                 cursor.execute(query, params)
-#                 user_id = cursor.fetchone()
-#                 return user_id
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
+    def get_book_id(self, book_title: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('SELECT Book_ID FROM Book WHERE Title = ?', (book_title,))
+                book_id = cursor.fetchone()
+                return book_id
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def get_user_id(self, first_name: str, last_name: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                query = 'SELECT User_ID FROM User WHERE FirstName = ? AND LastName = ?'
+                params = (first_name, last_name)
+                cursor.execute(query, params)
+                user_id = cursor.fetchone()
+                return user_id
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
 #
 #     def get_columns_name(self, table_name: str):
 #         try:
