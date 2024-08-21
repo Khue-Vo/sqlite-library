@@ -8,16 +8,16 @@ import typer
 
 from library.database import DatabaseHandler
 
-#
-# class Library:
-#     def __init__(self):
-#         try:
-#             self._dbhandler = DatabaseHandler()
-#             self._dbhandler.init_table()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while connecting to database: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+
+class Library:
+    def __init__(self):
+        try:
+            self._dbhandler = DatabaseHandler()
+            self._dbhandler.init_table()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while connecting to database: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def rollback(self):
 #         try:
 #             self._dbhandler.rollback()

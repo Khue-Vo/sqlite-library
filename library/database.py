@@ -8,83 +8,83 @@ from typing import List
 import typer
 
 
-# class DatabaseHandler:
-#     my_library = 'library.db'
-#
-#     def __init__(self):
-#         try:
-#             self._conn = sqlite3.connect(self.my_library)
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while creating database: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def init_table(self):
-#         try:
-#             """Initialize tables."""
-#             with self._conn:
-#                 self._conn.execute('''CREATE TABLE IF NOT EXISTS Genre
-#                                 (Genre_ID INTEGER NOT NULL,
-#                                  GenreName TEXT UNIQUE,
-#                                  PRIMARY KEY(Genre_ID AUTOINCREMENT)
-#                                  );''')
-#                 self._conn.execute('''CREATE TABLE IF NOT EXISTS Author
-#                                 (Author_ID	INTEGER NOT NULL,
-#                                 FirstName	TEXT,
-#                                 LastName	TEXT,
-#                                 Birthday	TEXT,
-#                                 PRIMARY KEY(Author_ID AUTOINCREMENT)
-#                                 );''')
-#                 self._conn.execute('''CREATE TABLE IF NOT EXISTS Book
-#                                 (Book_ID INTEGER NOT NULL,
-#                                 Title TEXT UNIQUE,
-#                                 Genre_ID INTEGER,
-#                                 Series TEXT,
-#                                 Author_ID INTEGER,
-#                                 LoanStatus TEXT DEFAULT 'Available',
-#                                 FOREIGN KEY(Author_ID) REFERENCES Author(Author_ID)
-#                                 FOREIGN KEY(Genre_ID) REFERENCES Genre(Genre_ID),
-#                                 PRIMARY KEY(Book_ID AUTOINCREMENT)
-#                                 );''')
-#                 self._conn.execute('''CREATE TABLE IF NOT EXISTS User
-#                                 (User_ID INTEGER NOT NULL,
-#                                 FirstName TEXT,
-#                                 LastName TEXT,
-#                                 Address TEXT,
-#                                 Email TEXT UNIQUE,
-#                                 PhoneNumber TEXT UNIQUE,
-#                                 PRIMARY KEY(User_ID AUTOINCREMENT)
-#                                 );''')
-#                 self._conn.execute('''CREATE TABLE IF NOT EXISTS Loan
-#                                 (Loan_ID INTEGER NOT NULL,
-#                                 Book_ID INTEGER,
-#                                 User_ID INTEGER,
-#                                 LoanDate TEXT DEFAULT CURRENT_DATE,
-#                                 DueDate INTEGER, DateReturn INTEGER,
-#                                 LoanStatus TEXT DEFAULT "Not Return",
-#                                 FOREIGN KEY(Book_ID) REFERENCES Book(Book_ID),
-#                                 FOREIGN KEY(User_ID) REFERENCES User(User_ID),
-#                                 PRIMARY KEY(Loan_ID AUTOINCREMENT)
-#                                 );''')
-#                 self._conn.execute('''CREATE TRIGGER IF NOT EXISTS update_book_status
-#                                 AFTER INSERT ON Loan
-#                                 FOR EACH ROW
-#                                 BEGIN
-#                                     UPDATE Book
-#                                     SET LoanStatus = 'Not Available'
-#                                     WHERE Book_ID = NEW.Book_ID;
-#                                 END''')
-#                 self._conn.execute('''CREATE TRIGGER IF NOT EXISTS update_book_status_return
-#                                 AFTER UPDATE OF LoanStatus ON Loan
-#                                 FOR EACH ROW
-#                                 BEGIN
-#                                     UPDATE Book
-#                                     SET LoanStatus = 'Available'
-#                                     WHERE Book_ID = OLD.Book_ID;
-#                                 END''')
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while creating tables: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+class DatabaseHandler:
+    my_library = 'library.db'
+
+    def __init__(self):
+        try:
+            self._conn = sqlite3.connect(self.my_library)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while creating database: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def init_table(self):
+        try:
+            """Initialize tables."""
+            with self._conn:
+                self._conn.execute('''CREATE TABLE IF NOT EXISTS Genre
+                                (Genre_ID INTEGER NOT NULL,
+                                 GenreName TEXT UNIQUE,
+                                 PRIMARY KEY(Genre_ID AUTOINCREMENT)
+                                 );''')
+                self._conn.execute('''CREATE TABLE IF NOT EXISTS Author
+                                (Author_ID	INTEGER NOT NULL,
+                                FirstName	TEXT,
+                                LastName	TEXT,
+                                Birthday	TEXT,
+                                PRIMARY KEY(Author_ID AUTOINCREMENT)
+                                );''')
+                self._conn.execute('''CREATE TABLE IF NOT EXISTS Book
+                                (Book_ID INTEGER NOT NULL,
+                                Title TEXT UNIQUE,
+                                Genre_ID INTEGER,
+                                Series TEXT,
+                                Author_ID INTEGER,
+                                LoanStatus TEXT DEFAULT 'Available',
+                                FOREIGN KEY(Author_ID) REFERENCES Author(Author_ID)
+                                FOREIGN KEY(Genre_ID) REFERENCES Genre(Genre_ID),
+                                PRIMARY KEY(Book_ID AUTOINCREMENT)
+                                );''')
+                self._conn.execute('''CREATE TABLE IF NOT EXISTS User
+                                (User_ID INTEGER NOT NULL,
+                                FirstName TEXT,
+                                LastName TEXT,
+                                Address TEXT,
+                                Email TEXT UNIQUE,
+                                PhoneNumber TEXT UNIQUE,
+                                PRIMARY KEY(User_ID AUTOINCREMENT)
+                                );''')
+                self._conn.execute('''CREATE TABLE IF NOT EXISTS Loan
+                                (Loan_ID INTEGER NOT NULL,
+                                Book_ID INTEGER,
+                                User_ID INTEGER,
+                                LoanDate TEXT DEFAULT CURRENT_DATE,
+                                DueDate INTEGER, DateReturn INTEGER,
+                                LoanStatus TEXT DEFAULT "Not Return",
+                                FOREIGN KEY(Book_ID) REFERENCES Book(Book_ID),
+                                FOREIGN KEY(User_ID) REFERENCES User(User_ID),
+                                PRIMARY KEY(Loan_ID AUTOINCREMENT)
+                                );''')
+                self._conn.execute('''CREATE TRIGGER IF NOT EXISTS update_book_status
+                                AFTER INSERT ON Loan
+                                FOR EACH ROW
+                                BEGIN
+                                    UPDATE Book
+                                    SET LoanStatus = 'Not Available'
+                                    WHERE Book_ID = NEW.Book_ID;
+                                END''')
+                self._conn.execute('''CREATE TRIGGER IF NOT EXISTS update_book_status_return
+                                AFTER UPDATE OF LoanStatus ON Loan
+                                FOR EACH ROW
+                                BEGIN
+                                    UPDATE Book
+                                    SET LoanStatus = 'Available'
+                                    WHERE Book_ID = OLD.Book_ID;
+                                END''')
+        except sqlite3.Error as e:
+            typer.secho(f"Error while creating tables: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def rollback(self):
 #         try:
 #             with self._conn:

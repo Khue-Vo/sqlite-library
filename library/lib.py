@@ -7,28 +7,28 @@ import sqlite3
 from library.library import Library
 from library import (__version__, __app_name__)
 
-# app = typer.Typer()
-# lib: Optional[Library] = None
-#
-#
-# def get_database():
-#     global lib
-#     lib = Library()
-#
-#
-# @app.command()
-# def init() -> None:
-#     """Initialize the library database."""
-#     try:
-#         get_database()
-#         typer.secho("Initialized the database successfully."
-#                     "\nThe database is C:\\Users\\Khue Vo\\training\\python\\sqlite-library\\library.db",
-#                     fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while initializing the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+app = typer.Typer()
+lib: Optional[Library] = None
+
+
+def get_database():
+    global lib
+    lib = Library()
+
+
+@app.command()
+def init() -> None:
+    """Initialize the library database."""
+    try:
+        get_database()
+        typer.secho("Initialized the database successfully."
+                    "\nThe database is C:\\Users\\Khue Vo\\training\\python\\sqlite-library\\library.db",
+                    fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while initializing the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # # @app.command()
 # # def close() -> None:
 # #     """Close the library database."""
