@@ -85,23 +85,23 @@ class DatabaseHandler:
             typer.secho(f"Error while creating tables: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def rollback(self):
-#         try:
-#             with self._conn:
-#                 self._conn.rollback()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while closing the database: {e}.", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def add_genre(self, genre_name: str):
-#         try:
-#             with self._conn:
-#                 self._conn.execute('INSERT INTO Genre (GenreName) VALUES (?)',
-#                                    (genre_name,))
-#                 self._conn.commit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
+    def rollback(self):
+        try:
+            with self._conn:
+                self._conn.rollback()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while closing the database: {e}.", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def add_genre(self, genre_name: str):
+        try:
+            with self._conn:
+                self._conn.execute('INSERT INTO Genre (GenreName) VALUES (?)',
+                                   (genre_name,))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
 #
 #     def add_author(self, first_name: str, last_name: str, birth: str):
 #         try:

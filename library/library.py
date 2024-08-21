@@ -18,19 +18,19 @@ class Library:
             typer.secho(f"Error while connecting to database: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def rollback(self):
-#         try:
-#             self._dbhandler.rollback()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error: {e}.", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def add_genre(self, genre: str):
-#         try:
-#             self._dbhandler.add_genre(genre)
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
+    def rollback(self):
+        try:
+            self._dbhandler.rollback()
+        except sqlite3.Error as e:
+            typer.secho(f"Error: {e}.", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def add_genre(self, genre: str):
+        try:
+            self._dbhandler.add_genre(genre)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
 #
 #     def add_author(self, first_name: str, last_name: str, birthday: str):
 #         try:

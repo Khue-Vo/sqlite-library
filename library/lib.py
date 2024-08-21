@@ -29,32 +29,22 @@ def init() -> None:
         raise typer.Exit()
 
 
-# # @app.command()
-# # def close() -> None:
-# #     """Close the library database."""
-# #     try:
-# #         get_database()
-# #         lib.close()
-# #         typer.secho(f"Close the database.", fg=typer.colors.GREEN)
-# #     except sqlite3.Error as e:
-# #         typer.secho(f"Error while closing the database: {e}.", fg=typer.colors.RED)
-# #         raise typer.Exit()
-#
-# @app.command()
-# def add_genre(
-#         genre: str = typer.Option(..., prompt="Genre name"),
-# ) -> None:
-#     """Add genre information into the library database."""
-#     try:
-#         get_database()
-#         lib.add_genre(genre)
-#         typer.secho(f"Genre {genre} successfully added.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error adding genre into the database: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+
+@app.command()
+def add_genre(
+        genre: str = typer.Option(..., prompt="Genre name"),
+) -> None:
+    """Add genre information into the library database."""
+    try:
+        get_database()
+        lib.add_genre(genre)
+        typer.secho(f"Genre {genre} successfully added.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error adding genre into the database: {e}.", fg=typer.colors.RED)
+        lib.rollback()
+        raise typer.Exit()
+
+
 # @app.command()
 # def add_author(
 #         first_name: str = typer.Option(..., prompt="First name"),
@@ -510,25 +500,25 @@ def init() -> None:
 #
 #
 #
-# def _version_callback(value: bool) -> None:
-#     if value:
-#         typer.echo(f"{__app_name__} v{__version__}")
-#         raise typer.Exit()
-#
-#
-# @app.callback()
-# def main(
-#         version: Optional[bool] = typer.Option(
-#             None,
-#             "--version",
-#             "-v",
-#             help="Show the application's version and exit,",
-#             callback=_version_callback,
-#             is_eager=True,
-#         )
-# ) -> None:
-#     return
-#
+def _version_callback(value: bool) -> None:
+    if value:
+        typer.echo(f"{__app_name__} v{__version__}")
+        raise typer.Exit()
+
+
+@app.callback()
+def main(
+        version: Optional[bool] = typer.Option(
+            None,
+            "--version",
+            "-v",
+            help="Show the application's version and exit,",
+            callback=_version_callback,
+            is_eager=True,
+        )
+) -> None:
+    return
+
 #
 # def print_table(table_name: str, table_content, column_name):
 #     column_width = [max(len(str(item[i])) for item in table_content) for i in range(len(column_name))]
