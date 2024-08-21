@@ -80,25 +80,25 @@ def add_book(
         raise typer.Exit()
 
 
-# @app.command()
-# def add_user(
-#         first_name: str = typer.Option(..., prompt="First name"),
-#         last_name: str = typer.Option(..., prompt="Last name"),
-#         address: str = typer.Option(..., prompt="Address"),
-#         email: str = typer.Option(..., prompt="Email"),
-#         phone: str = typer.Option(..., prompt="Phone Number"),
-# ) -> None:
-#     """Add user information into the library database."""
-#     try:
-#         get_database()
-#         lib.add_user(first_name, last_name, address, email, phone)
-#         typer.secho(f"User {first_name} {last_name} added successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error adding user into the database: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+@app.command()
+def add_user(
+        first_name: str = typer.Option(..., prompt="First name"),
+        last_name: str = typer.Option(..., prompt="Last name"),
+        address: str = typer.Option(..., prompt="Address"),
+        email: str = typer.Option(..., prompt="Email"),
+        phone: str = typer.Option(..., prompt="Phone Number"),
+) -> None:
+    """Add user information into the library database."""
+    try:
+        get_database()
+        lib.add_user(first_name, last_name, address, email, phone)
+        typer.secho(f"User {first_name} {last_name} added successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error adding user into the database: {e}.", fg=typer.colors.RED)
+        lib.rollback()
+        raise typer.Exit()
+
+
 # @app.command()
 # def add_loan(
 #         title: str = typer.Option(..., prompt="Book Title"),

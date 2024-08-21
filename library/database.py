@@ -123,18 +123,18 @@ class DatabaseHandler:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
-#         try:
-#             with self._conn:
-#                 self._conn.execute(
-#                     'INSERT INTO User (FirstName, LastName, Address, Email, PhoneNumber) VALUES (?,?,?,?,?)',
-#                     (first_name, last_name, address, email, phone_num,)
-#                 )
-#                 self._conn.commit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
+        try:
+            with self._conn:
+                self._conn.execute(
+                    'INSERT INTO User (FirstName, LastName, Address, Email, PhoneNumber) VALUES (?,?,?,?,?)',
+                    (first_name, last_name, address, email, phone_num,)
+                )
+                self._conn.commit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def add_loan(self, book_id: int, user_id: int, loan_day: str, due_day: str):
 #         try:
 #             with self._conn:

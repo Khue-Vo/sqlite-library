@@ -49,13 +49,13 @@ class Library:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
-#         try:
-#             self._dbhandler.add_user(first_name, last_name, address, email, phone_num)
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
+        try:
+            self._dbhandler.add_user(first_name, last_name, address, email, phone_num)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def add_loan(self, book_title: str, user: str, loan_day: str, due_day: str):
 #         try:
 #             book_id = self.get_book_id(book_title)
