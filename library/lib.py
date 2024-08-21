@@ -1,12 +1,12 @@
-# """This module provides the library management"""
-# # lib.py
-#
-# import typer
-# from typing import List, Optional
-# import sqlite3
-# from library.library import Library
-# from library import (__version__, __app_name__)
-#
+"""This module provides the library management"""
+# lib.py
+
+import typer
+from typing import List, Optional
+import sqlite3
+from library.library import Library
+from library import (__version__, __app_name__)
+
 # app = typer.Typer()
 # lib: Optional[Library] = None
 #

@@ -1,13 +1,13 @@
-# """This module provides the library database functionality."""
-# # database.py
-#
-#
-# import sqlite3
-# from typing import List
-#
-# import typer
-#
-#
+"""This module provides the library database functionality."""
+# database.py
+
+
+import sqlite3
+from typing import List
+
+import typer
+
+
 # class DatabaseHandler:
 #     my_library = 'library.db'
 #

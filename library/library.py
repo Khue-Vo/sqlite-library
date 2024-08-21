@@ -1,13 +1,13 @@
-# """This module provides the to-do model-controller."""
-# # library.py
-#
-# import sqlite3
-# from typing import List
-#
-# import typer
-#
-# from library.database import DatabaseHandler
-#
+"""This module provides the to-do model-controller."""
+# library.py
+
+import sqlite3
+from typing import List
+
+import typer
+
+from library.database import DatabaseHandler
+
 #
 # class Library:
 #     def __init__(self):
