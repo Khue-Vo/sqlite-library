@@ -31,14 +31,14 @@ class Library:
         except sqlite3.Error as e:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
-#
-#     def add_author(self, first_name: str, last_name: str, birthday: str):
-#         try:
-#             self._dbhandler.add_author(first_name, last_name, birthday)
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+
+    def add_author(self, first_name: str, last_name: str, birthday: str):
+        try:
+            self._dbhandler.add_author(first_name, last_name, birthday)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def add_book(self, book_title: str, genre: str, series: str, author: str):
 #         try:
 #             genre_id = self.get_genre_id(genre)

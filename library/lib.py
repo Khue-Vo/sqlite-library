@@ -45,23 +45,23 @@ def add_genre(
         raise typer.Exit()
 
 
-# @app.command()
-# def add_author(
-#         first_name: str = typer.Option(..., prompt="First name"),
-#         last_name: str = typer.Option(..., prompt="Last name"),
-#         birthday: str = typer.Option(..., prompt="Birthday(YYYY-DD-MM)"),
-# ) -> None:
-#     """Add author information into the library database."""
-#     try:
-#         get_database()
-#         lib.add_author(first_name, last_name, birthday)
-#         typer.secho(f"Author {first_name} {last_name} added successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error adding author into the database: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+@app.command()
+def add_author(
+        first_name: str = typer.Option(..., prompt="First name"),
+        last_name: str = typer.Option(..., prompt="Last name"),
+        birthday: str = typer.Option(..., prompt="Birthday(YYYY-DD-MM)"),
+) -> None:
+    """Add author information into the library database."""
+    try:
+        get_database()
+        lib.add_author(first_name, last_name, birthday)
+        typer.secho(f"Author {first_name} {last_name} added successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error adding author into the database: {e}.", fg=typer.colors.RED)
+        lib.rollback()
+        raise typer.Exit()
+
+
 # @app.command()
 # def add_book(
 #         title: str = typer.Option(..., prompt="Title"),
