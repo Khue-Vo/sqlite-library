@@ -113,16 +113,16 @@ class DatabaseHandler:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    # def add_book(self, book_title: str, genre_id: int, series: str, author_id: int):
-#         try:
-#             with self._conn:
-#                 self._conn.execute('INSERT INTO Book (Title, Genre_ID, Series, Author_ID) VALUES (?,?,?,?)',
-#                                    (book_title, genre_id, series, author_id,))
-#                 self._conn.commit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def add_book(self, book_title: str, genre_id: int, series: str, author_id: int):
+        try:
+            with self._conn:
+                self._conn.execute('INSERT INTO Book (Title, Genre_ID, Series, Author_ID) VALUES (?,?,?,?)',
+                                   (book_title, genre_id, series, author_id,))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
 #         try:
 #             with self._conn:
@@ -487,29 +487,29 @@ class DatabaseHandler:
 #             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
 #             raise typer.Exit()
 #
-#     def get_genre_id(self, genre_name: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('SELECT Genre_ID FROM Genre WHERE GenreName = ?', (genre_name,))
-#                 genre_id = cursor.fetchone()
-#                 return genre_id
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_author_id(self, first_name: str, last_name: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('SELECT Author_ID FROM Author WHERE FirstName = ? AND LastName = ?',
-#                                (first_name, last_name,))
-#                 author_id = cursor.fetchone()
-#                 return author_id
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def get_genre_id(self, genre_name: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('SELECT Genre_ID FROM Genre WHERE GenreName = ?', (genre_name,))
+                genre_id = cursor.fetchone()
+                return genre_id
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def get_author_id(self, first_name: str, last_name: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('SELECT Author_ID FROM Author WHERE FirstName = ? AND LastName = ?',
+                               (first_name, last_name,))
+                author_id = cursor.fetchone()
+                return author_id
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def get_book_id(self, book_title: str):
 #         try:
 #             with self._conn:

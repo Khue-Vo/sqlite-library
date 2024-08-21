@@ -39,16 +39,16 @@ class Library:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def add_book(self, book_title: str, genre: str, series: str, author: str):
-#         try:
-#             genre_id = self.get_genre_id(genre)
-#             first_name, last_name = author.split(maxsplit=1)
-#             author_id = self.get_author_id(first_name, last_name)
-#             self._dbhandler.add_book(book_title, genre_id, series, author_id)
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def add_book(self, book_title: str, genre: str, series: str, author: str):
+        try:
+            genre_id = self.get_genre_id(genre)
+            first_name, last_name = author.split(maxsplit=1)
+            author_id = self.get_author_id(first_name, last_name)
+            self._dbhandler.add_book(book_title, genre_id, series, author_id)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def add_user(self, first_name: str, last_name: str, address: str, email: str, phone_num: str):
 #         try:
 #             self._dbhandler.add_user(first_name, last_name, address, email, phone_num)
@@ -278,31 +278,31 @@ class Library:
 #         except sqlite3.Error as e:
 #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
 #             raise typer.Exit()
-#
-#     def get_genre_id(self, genre_name):
-#         try:
-#             genre_id = self._dbhandler.get_genre_id(genre_name)
-#             if genre_id:
-#                 return genre_id[0]
-#             else:
-#                 typer.secho("Genre doesn't exist. Please enter another genre's name.", fg=typer.colors.RED)
-#                 raise typer.Exit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_author_id(self, first_name, last_name):
-#         try:
-#             author_id = self._dbhandler.get_author_id(first_name, last_name)
-#             if author_id:
-#                 return author_id[0]
-#             else:
-#                 typer.secho("Author doesn't exist. Please enter another author's name.", fg=typer.colors.RED)
-#                 raise typer.Exit()
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+
+    def get_genre_id(self, genre_name):
+        try:
+            genre_id = self._dbhandler.get_genre_id(genre_name)
+            if genre_id:
+                return genre_id[0]
+            else:
+                typer.secho("Genre doesn't exist. Please enter another genre's name.", fg=typer.colors.RED)
+                raise typer.Exit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def get_author_id(self, first_name, last_name):
+        try:
+            author_id = self._dbhandler.get_author_id(first_name, last_name)
+            if author_id:
+                return author_id[0]
+            else:
+                typer.secho("Author doesn't exist. Please enter another author's name.", fg=typer.colors.RED)
+                raise typer.Exit()
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def get_book_id(self, book_name):
 #         try:
 #             book_id = self._dbhandler.get_book_id(book_name)
