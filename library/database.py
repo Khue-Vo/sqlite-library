@@ -538,18 +538,18 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def search_loan(self, user_id: int, book_id: int):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT *  FROM Loan WHERE User_ID = ? AND Book_ID = ?''',
-#                                (user_id, book_id,))
-#                 if_exist = cursor.fetchone()
-#                 return if_exist
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def search_loan(self, user_id: int, book_id: int):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT *  FROM Loan WHERE User_ID = ? AND Book_ID = ?''',
+                               (user_id, book_id,))
+                if_exist = cursor.fetchone()
+                return if_exist
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def search_book_by_genre(self, genre_id: int):
 #         try:
 #             with self._conn:

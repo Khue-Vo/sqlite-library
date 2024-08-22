@@ -470,23 +470,23 @@ def search_user(user_name: str = typer.Option(..., prompt="User's name")) -> Non
         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
         raise typer.Exit()
 
-#
-# @app.command()
-# def search_loan(user_name: str = typer.Option(..., prompt="User's name"),
-#                 book_title: str = typer.Option(..., prompt="Book's title")) -> None:
-#     """Search if a specific loan exists in the library database."""
-#     try:
-#         get_database()
-#         exist = lib.search_loan(user_name, book_title)
-#         if exist:
-#             typer.secho("Loan does exist.", fg=typer.colors.GREEN)
-#         else:
-#             typer.secho("Loan doesn't exist. Please enter another loan's information.", fg=typer.colors.RED)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+
+@app.command()
+def search_loan(user_name: str = typer.Option(..., prompt="User's name"),
+                book_title: str = typer.Option(..., prompt="Book's title")) -> None:
+    """Search if a specific loan exists in the library database."""
+    try:
+        get_database()
+        exist = lib.search_loan(user_name, book_title)
+        if exist:
+            typer.secho("Loan does exist.", fg=typer.colors.GREEN)
+        else:
+            typer.secho("Loan doesn't exist. Please enter another loan's information.", fg=typer.colors.RED)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def search_by_genre(genre: str = typer.Option(..., prompt="Genre's name")) -> None:
 #     """List books within a specific genre in the library database."""

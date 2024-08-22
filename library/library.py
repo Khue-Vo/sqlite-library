@@ -334,20 +334,20 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def search_loan(self, user_name, book_title):
-    #         try:
-    #             first_name, last_name = user_name.split(" ", maxsplit=1)
-    #             user_id = self.get_user_id(first_name, last_name)
-    #             book_id = self.get_book_id(book_title)
-    #             loan = self._dbhandler.search_loan(user_id, book_id)
-    #             if loan:
-    #                 return True
-    #             else:
-    #                 return False
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def search_loan(self, user_name, book_title):
+        try:
+            first_name, last_name = user_name.split(" ", maxsplit=1)
+            user_id = self.get_user_id(first_name, last_name)
+            book_id = self.get_book_id(book_title)
+            loan = self._dbhandler.search_loan(user_id, book_id)
+            if loan:
+                return True
+            else:
+                return False
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def search_book_by_genre(self, genre_name: str):
     #         try:
     #             genre_id = self.get_genre_id(genre_name)
