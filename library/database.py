@@ -227,7 +227,32 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-
+    def update_loan(self, loan_id: int, new_book_id: int, new_user_id: int, new_loandate: str, new_duedate: str, new_returndate: str, new_loanstatus: str):
+        try:
+            with self._conn:
+                if new_book_id != 0:
+                    self._conn.execute('''UPDATE Loan SET Book_ID = ? WHERE Loan_ID = ?''',
+                                       (new_book_id, loan_id))
+                if new_user_id != 0:
+                    self._conn.execute('''UPDATE Loan SET User_ID = ? WHERE Loan_ID = ?''',
+                                       (new_user_id, loan_id))
+                if new_loandate != "null":
+                    self._conn.execute('''UPDATE Loan SET LoanDate = ? WHERE Loan_ID = ?''',
+                                       (new_loandate, loan_id))
+                if new_duedate != "null":
+                    self._conn.execute('''UPDATE Loan SET DueDate = ? WHERE Loan_ID = ?''',
+                                       (new_duedate, loan_id))
+                if new_returndate != "null":
+                    self._conn.execute('''UPDATE Loan SET DateReturn = ? WHERE Loan_ID = ?''',
+                                       (new_returndate, loan_id))
+                if new_loanstatus != "null":
+                    self._conn.execute('''UPDATE Loan SET LoanStatus = ? WHERE Loan_ID = ?''',
+                                       (new_loanstatus, loan_id))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            self.rollback()
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
 
 #     def list_all_genre(self):
 #         try:

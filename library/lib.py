@@ -158,10 +158,10 @@ def update_book(book_id: int = typer.Option(..., prompt="Book's ID"),
 
 @app.command()
 def update_user(user_id: int = typer.Option(..., prompt="User's ID"),
-                new_name: str = typer.Option(..., prompt="Last name"),
-                new_address: str = typer.Option(..., prompt="Address"),
-                new_email: str = typer.Option(..., prompt="Email"),
-                new_phone: str = typer.Option(..., prompt="Phone Number")
+                new_name: str = typer.Option(..., prompt="New name"),
+                new_address: str = typer.Option(..., prompt="New address"),
+                new_email: str = typer.Option(..., prompt="New email"),
+                new_phone: str = typer.Option(..., prompt="New phone number")
                 ) -> None:
     """Update the chosen user information in the library database."""
     try:
@@ -173,18 +173,24 @@ def update_user(user_id: int = typer.Option(..., prompt="User's ID"),
         raise typer.Exit()
 
 
-# @app.command()
-# def update_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
-#     """Update the chosen loan information in the library database."""
-#     try:
-#         get_database()
-#
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while updating loan: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+@app.command()
+def update_loan(loan_id: int = typer.Option(..., prompt="Loan's ID"),
+                new_book: str = typer.Option(..., prompt="New book title"),
+                new_user: str = typer.Option(..., prompt="New user's name"),
+                new_loandate: str = typer.Option(..., prompt="New loan date"),
+                new_duedate: str = typer.Option(..., prompt="New due date"),
+                new_returndate: str = typer.Option(..., prompt="New return date"),
+                new_loanstatus: str = typer.Option(..., prompt="New loan status"),) -> None:
+    """Update the chosen loan information in the library database."""
+    try:
+        get_database()
+        lib.update_loan(loan_id, new_book, new_user, new_loandate, new_duedate, new_returndate, new_loanstatus)
+        typer.secho(f"Loan updated successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while updating loan: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # # @app.command()
 # # def info_genre(genre_id: int = typer.Option(..., prompt="Genre's ID")) -> None:
 # #     """Check a specific genre's information in the library database."""

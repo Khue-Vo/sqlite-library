@@ -129,7 +129,34 @@ class Library:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #
+    def update_loan(self, loan_id: int, new_book: str, new_user: str, new_loandate: str, new_duedate: str, new_returndate: str, new_loanstatus: str):
+        try:
+            if new_book == "null" or new_book == "Null" or new_book == "none" or new_book == "None":
+                new_book_id = 0
+            else:
+                new_book_id = self.get_book_id(new_book)
+
+            if new_user == "null" or new_user == "Null" or new_user == "none" or new_user == "None":
+                new_user_id = 0
+            else:
+                new_user_id = self.get_book_id(new_book)
+
+            if new_loandate == "null" or new_loandate == "Null" or new_loandate == "none" or new_loandate == "None":
+                new_loandate = "null"
+
+            if new_duedate == "null" or new_duedate == "Null" or new_duedate == "none" or new_duedate == "None":
+                new_duedate = "null"
+
+            if new_returndate == "null" or new_returndate == "Null" or new_returndate == "none" or new_returndate == "None":
+                new_returndate = "null"
+
+            if new_loanstatus == "null" or new_loanstatus == "Null" or new_loanstatus == "none" or new_loanstatus == "None":
+                new_loanstatus = "null"
+
+            self._dbhandler.update_loan(loan_id, new_book_id, new_user_id, new_loandate, new_duedate, new_returndate, new_loanstatus)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
 #     def list_all_genre(self):
 #         try:
 #             all_genre = self._dbhandler.list_all_genre()
