@@ -385,18 +385,18 @@ def show_book_in_series() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def show_book_not_in_series() -> None:
-#     """List the books which does not belong to a series in the library database."""
-#     try:
-#         get_database()
-#         non_series_book, column_names = lib.book_not_in_series()
-#         print_table("Non-series books", non_series_book, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing non-series books from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def show_book_not_in_series() -> None:
+    """List the books which does not belong to a series in the library database."""
+    try:
+        get_database()
+        non_series_book, column_names = lib.book_not_in_series()
+        print_table("Non-series books", non_series_book, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing non-series books from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 @app.command()
 def list_available_book() -> None:
     """List the books that are available for loan in the library database."""
