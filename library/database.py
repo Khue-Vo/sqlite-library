@@ -151,10 +151,28 @@ class DatabaseHandler:
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_genre(self, genre_id: int, new_info: str):
+    def update_genre(self, genre_id: int, new_genre: str):
         try:
             with self._conn:
-                self._conn.execute('''UPDATE Genre SET GenreName = ? WHERE Genre_ID = ?''', (new_info, genre_id))
+                self._conn.execute('''UPDATE Genre SET GenreName = ? WHERE Genre_ID = ?''', (new_genre, genre_id))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            self.rollback()
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def update_author(self, author_id: int, new_firstname: str, new_lastname: str, new_birthday: str):
+        try:
+            with self._conn:
+                if new_firstname != "null":
+                    self._conn.execute('''UPDATE Author SET FirstName = ? WHERE Author_ID = ?''',
+                                       (new_firstname, author_id))
+                if new_lastname != "null":
+                    self._conn.execute('''UPDATE Author SET LastName = ? WHERE Author_ID = ?''',
+                                       (new_lastname, author_id))
+                if new_birthday != "null":
+                    self._conn.execute('''UPDATE Author SET Birthday = ? WHERE Author_ID = ?''',
+                                       (new_birthday, author_id))
                 self._conn.commit()
         except sqlite3.Error as e:
             self.rollback()
