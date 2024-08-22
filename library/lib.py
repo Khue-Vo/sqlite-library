@@ -268,22 +268,22 @@ def list_all_user() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def list_all_loan() -> None:
-#     """Show all loans within the library database."""
-#     try:
-#         get_database()
-#         all_loan, column_name = lib.list_all_loan()
-#         if len(all_loan) == 0:
-#             typer.secho("There are no loan in the table yet. Please add one first.", fg=typer.colors.RED)
-#             raise typer.Exit()
-#         print_table("Loan", all_loan, column_name)
-#         typer.secho(f"\nLoan table listed successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing loans from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def list_all_loan() -> None:
+    """Show all loans within the library database."""
+    try:
+        get_database()
+        all_loan, column_name = lib.list_all_loan()
+        if len(all_loan) == 0:
+            typer.secho("There are no loan in the table yet. Please add one first.", fg=typer.colors.RED)
+            raise typer.Exit()
+        print_table("Loan", all_loan, column_name)
+        typer.secho(f"\nLoan table listed successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing loans from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def show_genre_with_most_book() -> None:
 #     """Show the genre which have the most books stored in the library database."""
