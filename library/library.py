@@ -80,7 +80,8 @@ class Library:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_book(self, book_id: int, new_title: str, new_genre: str, new_series: str, new_author: str, new_status: str):
+    def update_book(self, book_id: int, new_title: str, new_genre: str, new_series: str, new_author: str,
+                    new_status: str):
         try:
             if new_title == "null" or new_title == "Null" or new_title == "none" or new_title == "None":
                 new_title = "null"
@@ -129,7 +130,8 @@ class Library:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_loan(self, loan_id: int, new_book: str, new_user: str, new_loandate: str, new_duedate: str, new_returndate: str, new_loanstatus: str):
+    def update_loan(self, loan_id: int, new_book: str, new_user: str, new_loandate: str, new_duedate: str,
+                    new_returndate: str, new_loanstatus: str):
         try:
             if new_book == "null" or new_book == "Null" or new_book == "none" or new_book == "None":
                 new_book_id = 0
@@ -153,215 +155,217 @@ class Library:
             if new_loanstatus == "null" or new_loanstatus == "Null" or new_loanstatus == "none" or new_loanstatus == "None":
                 new_loanstatus = "null"
 
-            self._dbhandler.update_loan(loan_id, new_book_id, new_user_id, new_loandate, new_duedate, new_returndate, new_loanstatus)
+            self._dbhandler.update_loan(loan_id, new_book_id, new_user_id, new_loandate, new_duedate, new_returndate,
+                                        new_loanstatus)
         except sqlite3.Error as e:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
-#     def list_all_genre(self):
-#         try:
-#             all_genre = self._dbhandler.list_all_genre()
-#             column_names = self._dbhandler.get_columns_name("Genre")
-#             return [all_genre, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def list_all_author(self):
-#         try:
-#             all_author = self._dbhandler.list_all_author()
-#             column_names = self._dbhandler.get_columns_name("Author")
-#             return [all_author, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def list_all_book(self):
-#         try:
-#             all_book, column_names = self._dbhandler.list_all_book()
-#             return [all_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def list_all_user(self):
-#         try:
-#             all_user = self._dbhandler.list_all_user()
-#             column_names = self._dbhandler.get_columns_name("User")
-#             return [all_user, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def list_all_loan(self):
-#         try:
-#             all_loan, column_names = self._dbhandler.list_all_loan()
-#             return [all_loan, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def genre_with_most_book(self):
-#         try:
-#             genre_max, genre_with_book, column_names = self._dbhandler.get_genre_with_book()
-#             genre_name = genre_max[0][0]
-#             book_number = genre_max[0][1]
-#             return [genre_name, book_number, genre_with_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def author_with_most_book(self):
-#         try:
-#             author_max, author_with_book, column_names = self._dbhandler.get_author_with_book()
-#             author_name = author_max[0][0] + " " + author_max[0][1]
-#             book_number = author_max[0][2]
-#             return [author_name, book_number, author_with_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def book_in_series(self):
-#         try:
-#             series_book, column_names = self._dbhandler.get_series_book()
-#             return [series_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def book_not_in_series(self):
-#         try:
-#             non_series_book, column_names = self._dbhandler.get_non_series_book()
-#             return [non_series_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def available_books_for_loan(self):
-#         try:
-#             available_book, column_names = self._dbhandler.get_available_book()
-#             return [available_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def non_available_books_for_loan(self):
-#         try:
-#             non_available_book, column_names = self._dbhandler.get_non_available_book()
-#             return [non_available_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def check_if_available(self, book_title):
-#         try:
-#             book_status = self._dbhandler.check_if_available(book_title)
-#             return book_status[0]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def user_with_loan(self):
-#         try:
-#             user_list, column_names = self._dbhandler.get_user_with_loan()
-#             return [user_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def returned_loan(self):
-#         try:
-#             loan_list, column_names = self._dbhandler.get_returned_loan()
-#             return [loan_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def overdue_loan(self):
-#         try:
-#             loan_list, column_names = self._dbhandler.get_overdue_loan()
-#             return [loan_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_genre(self, genre_name: str):
-#         try:
-#             genre = self._dbhandler.search_genre(genre_name)
-#             if genre:
-#                 return True
-#             else:
-#                 return False
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_author(self, author_name: str):
-#         try:
-#             first_name, last_name = author_name.split(" ", maxsplit=1)
-#             author = self._dbhandler.search_author(first_name, last_name)
-#             if author:
-#                 return True
-#             else:
-#                 return False
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_book(self, book_title: str):
-#         try:
-#             book = self._dbhandler.search_book(book_title)
-#             if book:
-#                 return True
-#             else:
-#                 return False
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_user(self, user_name):
-#         try:
-#             first_name, last_name = user_name.split(" ", maxsplit=1)
-#             user = self._dbhandler.search_user(first_name, last_name)
-#             if user:
-#                 return True
-#             else:
-#                 return False
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_loan(self, user_name, book_title):
-#         try:
-#             first_name, last_name = user_name.split(" ", maxsplit=1)
-#             user_id = self.get_user_id(first_name, last_name)
-#             book_id = self.get_book_id(book_title)
-#             loan = self._dbhandler.search_loan(user_id, book_id)
-#             if loan:
-#                 return True
-#             else:
-#                 return False
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_book_by_genre(self, genre_name: str):
-#         try:
-#             genre_id = self.get_genre_id(genre_name)
-#             book_list, column_names = self._dbhandler.search_book_by_genre(genre_id)
-#             return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def search_book_by_author(self, author_name: str):
-#         try:
-#             first_name, last_name = author_name.split(maxsplit=1)
-#             author_id = self.get_author_id(first_name, last_name)
-#             book_list, column_names = self._dbhandler.search_book_by_author(author_id)
-#             return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
+
+    def list_all_genre(self):
+        try:
+            all_genre = self._dbhandler.list_all_genre()
+            column_names = self._dbhandler.get_columns_name("Genre")
+            return [all_genre, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    #     def list_all_author(self):
+    #         try:
+    #             all_author = self._dbhandler.list_all_author()
+    #             column_names = self._dbhandler.get_columns_name("Author")
+    #             return [all_author, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def list_all_book(self):
+    #         try:
+    #             all_book, column_names = self._dbhandler.list_all_book()
+    #             return [all_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def list_all_user(self):
+    #         try:
+    #             all_user = self._dbhandler.list_all_user()
+    #             column_names = self._dbhandler.get_columns_name("User")
+    #             return [all_user, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def list_all_loan(self):
+    #         try:
+    #             all_loan, column_names = self._dbhandler.list_all_loan()
+    #             return [all_loan, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def genre_with_most_book(self):
+    #         try:
+    #             genre_max, genre_with_book, column_names = self._dbhandler.get_genre_with_book()
+    #             genre_name = genre_max[0][0]
+    #             book_number = genre_max[0][1]
+    #             return [genre_name, book_number, genre_with_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def author_with_most_book(self):
+    #         try:
+    #             author_max, author_with_book, column_names = self._dbhandler.get_author_with_book()
+    #             author_name = author_max[0][0] + " " + author_max[0][1]
+    #             book_number = author_max[0][2]
+    #             return [author_name, book_number, author_with_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def book_in_series(self):
+    #         try:
+    #             series_book, column_names = self._dbhandler.get_series_book()
+    #             return [series_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def book_not_in_series(self):
+    #         try:
+    #             non_series_book, column_names = self._dbhandler.get_non_series_book()
+    #             return [non_series_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def available_books_for_loan(self):
+    #         try:
+    #             available_book, column_names = self._dbhandler.get_available_book()
+    #             return [available_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def non_available_books_for_loan(self):
+    #         try:
+    #             non_available_book, column_names = self._dbhandler.get_non_available_book()
+    #             return [non_available_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def check_if_available(self, book_title):
+    #         try:
+    #             book_status = self._dbhandler.check_if_available(book_title)
+    #             return book_status[0]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def user_with_loan(self):
+    #         try:
+    #             user_list, column_names = self._dbhandler.get_user_with_loan()
+    #             return [user_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def returned_loan(self):
+    #         try:
+    #             loan_list, column_names = self._dbhandler.get_returned_loan()
+    #             return [loan_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def overdue_loan(self):
+    #         try:
+    #             loan_list, column_names = self._dbhandler.get_overdue_loan()
+    #             return [loan_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_genre(self, genre_name: str):
+    #         try:
+    #             genre = self._dbhandler.search_genre(genre_name)
+    #             if genre:
+    #                 return True
+    #             else:
+    #                 return False
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_author(self, author_name: str):
+    #         try:
+    #             first_name, last_name = author_name.split(" ", maxsplit=1)
+    #             author = self._dbhandler.search_author(first_name, last_name)
+    #             if author:
+    #                 return True
+    #             else:
+    #                 return False
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_book(self, book_title: str):
+    #         try:
+    #             book = self._dbhandler.search_book(book_title)
+    #             if book:
+    #                 return True
+    #             else:
+    #                 return False
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_user(self, user_name):
+    #         try:
+    #             first_name, last_name = user_name.split(" ", maxsplit=1)
+    #             user = self._dbhandler.search_user(first_name, last_name)
+    #             if user:
+    #                 return True
+    #             else:
+    #                 return False
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_loan(self, user_name, book_title):
+    #         try:
+    #             first_name, last_name = user_name.split(" ", maxsplit=1)
+    #             user_id = self.get_user_id(first_name, last_name)
+    #             book_id = self.get_book_id(book_title)
+    #             loan = self._dbhandler.search_loan(user_id, book_id)
+    #             if loan:
+    #                 return True
+    #             else:
+    #                 return False
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_book_by_genre(self, genre_name: str):
+    #         try:
+    #             genre_id = self.get_genre_id(genre_name)
+    #             book_list, column_names = self._dbhandler.search_book_by_genre(genre_id)
+    #             return [book_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def search_book_by_author(self, author_name: str):
+    #         try:
+    #             first_name, last_name = author_name.split(maxsplit=1)
+    #             author_id = self.get_author_id(first_name, last_name)
+    #             book_list, column_names = self._dbhandler.search_book_by_author(author_id)
+    #             return [book_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
 
     def get_genre_id(self, genre_name):
         try:

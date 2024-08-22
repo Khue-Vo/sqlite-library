@@ -254,17 +254,17 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def list_all_genre(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('SELECT * FROM Genre')
-#                 all_genre = cursor.fetchall()
-#                 return all_genre
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def list_all_genre(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('SELECT * FROM Genre')
+                all_genre = cursor.fetchall()
+                return all_genre
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def list_all_author(self):
 #         try:
 #             with self._conn:

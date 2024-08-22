@@ -2,7 +2,7 @@
 # lib.py
 
 import typer
-from typing import List, Optional
+from typing import Optional
 import sqlite3
 from library.library import Library
 from library import (__version__, __app_name__)
@@ -27,7 +27,6 @@ def init() -> None:
     except sqlite3.Error as e:
         typer.secho(f"Error while initializing the database: {e}.", fg=typer.colors.RED)
         raise typer.Exit()
-
 
 
 @app.command()
@@ -180,7 +179,7 @@ def update_loan(loan_id: int = typer.Option(..., prompt="Loan's ID"),
                 new_loandate: str = typer.Option(..., prompt="New loan date"),
                 new_duedate: str = typer.Option(..., prompt="New due date"),
                 new_returndate: str = typer.Option(..., prompt="New return date"),
-                new_loanstatus: str = typer.Option(..., prompt="New loan status"),) -> None:
+                new_loanstatus: str = typer.Option(..., prompt="New loan status"), ) -> None:
     """Update the chosen loan information in the library database."""
     try:
         get_database()
@@ -205,22 +204,22 @@ def update_loan(loan_id: int = typer.Option(..., prompt="Loan's ID"),
 # #     """Check a specific loan's information in the library database."""
 #
 #
-# @app.command()
-# def list_all_genre() -> None:
-#     """Show all genres within the library database."""
-#     try:
-#         get_database()
-#         all_genre, column_name = lib.list_all_genre()
-#         if len(all_genre) == 0:
-#             typer.secho("There are no genre in the table yet. Please add one first.", fg=typer.colors.RED)
-#             raise typer.Exit()
-#         print_table("Genre", all_genre, column_name)
-#         typer.secho(f"\nGenre table listed successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing genres from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def list_all_genre() -> None:
+    """Show all genres within the library database."""
+    try:
+        get_database()
+        all_genre, column_name = lib.list_all_genre()
+        if len(all_genre) == 0:
+            typer.secho("There are no genre in the table yet. Please add one first.", fg=typer.colors.RED)
+            raise typer.Exit()
+        print_table("Genre", all_genre, column_name)
+        typer.secho(f"\nGenre table listed successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing genres from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def list_all_author() -> None:
 #     """Show all authors within the library database."""
@@ -532,13 +531,13 @@ def main(
 ) -> None:
     return
 
-#
-# def print_table(table_name: str, table_content, column_name):
-#     column_width = [max(len(str(item[i])) for item in table_content) for i in range(len(column_name))]
-#     header = " | ".join(f"{column_name[i]:{column_width[i]}}" for i in range(len(column_name)))
-#
-#     typer.secho(f"\n{table_name}\n", fg=typer.colors.CYAN, bold=True)
-#     typer.secho(header)
-#     typer.secho("-" * len(header))
-#     for row in table_content:
-#         typer.secho(" | ".join(f"{str(row[i]):{column_width[i]}}" for i in range(len(row))))
+
+def print_table(table_name: str, table_content, column_name):
+    column_width = [max(len(str(item[i])) for item in table_content) for i in range(len(column_name))]
+    header = " | ".join(f"{column_name[i]:{column_width[i]}}" for i in range(len(column_name)))
+
+    typer.secho(f"\n{table_name}\n", fg=typer.colors.CYAN, bold=True)
+    typer.secho(header)
+    typer.secho("-" * len(header))
+    for row in table_content:
+        typer.secho(" | ".join(f"{str(row[i]):{column_width[i]}}" for i in range(len(row))))
