@@ -262,8 +262,19 @@ class DatabaseHandler:
             with self._conn:
                 cursor = self._conn.cursor()
                 cursor.execute('''SELECT * FROM Genre WHERE Genre_ID = ?''', (genre_id,))
-                all_genre = cursor.fetchall()
-                return all_genre
+                genre = cursor.fetchall()
+                return genre
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+    def info_author(self, author_id: int):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT * FROM Author WHERE Author_ID = ?''', (author_id,))
+                author = cursor.fetchall()
+                return author
         except sqlite3.Error as e:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()

@@ -200,9 +200,19 @@ def info_genre(genre_id: int = typer.Option(..., prompt="Genre's ID")) -> None:
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
         raise typer.Exit()
-# @app.command()
-# def info_author(author_id: int = typer.Option(..., prompt="Author's ID")) -> None:
-#     """Check a specific author's information in the library database."""
+
+
+@app.command()
+def info_author(author_id: int = typer.Option(..., prompt="Author's ID")) -> None:
+    """Check a specific author's information in the library database."""
+    try:
+        get_database()
+        author, column_names = lib.info_author(author_id)
+        print_table(f"Author details:", author, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+        raise typer.Exit()
+
 # def info_book(book_id: int = typer.Option(..., prompt="Book's ID")) -> None:
 #     """Check a specific book's information in the library database."""
 # def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
