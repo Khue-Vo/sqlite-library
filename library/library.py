@@ -299,14 +299,14 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def check_if_available(self, book_title):
-    #         try:
-    #             book_status = self._dbhandler.check_if_available(book_title)
-    #             return book_status[0]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def check_if_available(self, book_title):
+        try:
+            book_status = self._dbhandler.check_if_available(book_title)
+            return book_status[0]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def user_with_loan(self):
     #         try:
     #             user_list, column_names = self._dbhandler.get_user_with_loan()

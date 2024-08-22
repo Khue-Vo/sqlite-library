@@ -421,21 +421,21 @@ def list_non_available_book() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def check_available_book(title: str = typer.Option(..., prompt="Title")) -> None:
-#     """Check if a specific book is available for loan or not."""
-#     try:
-#         get_database()
-#         book_status = lib.check_if_available(title)
-#         if book_status == "Available":
-#             typer.secho(f"The book {title} is available for loan.", fg=typer.colors.GREEN)
-#         elif book_status == "Not Available":
-#             typer.secho(f"The book {title} is unavailable for loan.", fg=typer.colors.RED)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking available of book: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def check_available_book(title: str = typer.Option(..., prompt="Title")) -> None:
+    """Check if a specific book is available for loan or not."""
+    try:
+        get_database()
+        book_status = lib.check_if_available(title)
+        if book_status == "Available":
+            typer.secho(f"The book {title} is available for loan.", fg=typer.colors.GREEN)
+        elif book_status == "Not Available":
+            typer.secho(f"The book {title} is unavailable for loan.", fg=typer.colors.RED)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking available of book: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def check_user_with_loan() -> None:
 #     """Check which user is currently borrowing books from the library."""

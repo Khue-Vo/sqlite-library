@@ -504,17 +504,17 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def check_if_available(self, book_title):
-    #         try:
-    #             with self._conn:
-    #                 cursor = self._conn.cursor()
-    #                 cursor.execute('SELECT LoanStatus FROM Book WHERE Title = ?', (book_title,))
-    #                 status = cursor.fetchone()
-    #                 return status
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def check_if_available(self, book_title):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('SELECT LoanStatus FROM Book WHERE Title = ?', (book_title,))
+                status = cursor.fetchone()
+                return status
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def get_user_with_loan(self):
     #         try:
     #             with self._conn:
