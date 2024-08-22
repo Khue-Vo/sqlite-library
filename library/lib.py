@@ -237,8 +237,20 @@ def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
         raise typer.Exit()
 
-# def info_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
-#     """Check a specific loan's information in the library database."""
+
+@app.command()
+def info_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
+    """Check a specific loan's information in the library database."""
+    try:
+        get_database()
+        loan, column_names = lib.info_loan(loan_id)
+        if len(loan) == 0:
+            typer.secho("Loan doesn't exist.", fg=typer.colors.RED)
+            raise typer.Exit()
+        print_table(f"Loan details:", loan, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+        raise typer.Exit()
 
 
 @app.command()
