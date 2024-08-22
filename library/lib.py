@@ -220,13 +220,23 @@ def info_book(book_id: int = typer.Option(..., prompt="Book's ID")) -> None:
     try:
         get_database()
         book, column_names = lib.info_book(book_id)
-        print_table(f"Author details:", book, column_names)
+        print_table(f"Book details:", book, column_names)
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
         raise typer.Exit()
 
-# def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
-#     """Check a specific user's information in the library database."""
+
+@app.command()
+def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
+    """Check a specific user's information in the library database."""
+    try:
+        get_database()
+        user, column_names = lib.info_user(user_id)
+        print_table(f"User details:", user, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+        raise typer.Exit()
+
 # def info_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
 #     """Check a specific loan's information in the library database."""
 

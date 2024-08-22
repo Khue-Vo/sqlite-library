@@ -187,6 +187,15 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
+    def info_user(self, user_id: int):
+        try:
+            user = self._dbhandler.info_user(user_id)
+            column_names = self._dbhandler.get_columns_name("User")
+            return [user, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     def list_all_genre(self):
         try:
             all_genre = self._dbhandler.list_all_genre()
