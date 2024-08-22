@@ -448,18 +448,18 @@ def check_user_with_loan() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def check_returned_loan() -> None:
-#     """Check which loan is returned."""
-#     try:
-#         get_database()
-#         loan_list, column_names = lib.returned_loan()
-#         print_table("Loans that have been returned.", loan_list, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def check_returned_loan() -> None:
+    """Check which loan is returned."""
+    try:
+        get_database()
+        loan_list, column_names = lib.returned_loan()
+        print_table("Loans that have been returned.", loan_list, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def check_overdue_loan() -> None:
 #     """Check which loan is overdue."""
