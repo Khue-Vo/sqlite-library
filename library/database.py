@@ -90,7 +90,7 @@ class DatabaseHandler:
             with self._conn:
                 self._conn.rollback()
         except sqlite3.Error as e:
-            typer.secho(f"Error while closing the database: {e}.", fg=typer.colors.RED)
+            typer.secho(f"Error: {e}.", fg=typer.colors.RED)
             raise typer.Exit()
 
     def add_genre(self, genre_name: str):
@@ -100,6 +100,7 @@ class DatabaseHandler:
                                    (genre_name,))
                 self._conn.commit()
         except sqlite3.Error as e:
+            self.rollback()
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
@@ -110,6 +111,7 @@ class DatabaseHandler:
                                    (first_name, last_name, birth,))
                 self._conn.commit()
         except sqlite3.Error as e:
+            self.rollback()
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
@@ -120,6 +122,7 @@ class DatabaseHandler:
                                    (book_title, genre_id, series, author_id,))
                 self._conn.commit()
         except sqlite3.Error as e:
+            self.rollback()
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
@@ -132,6 +135,7 @@ class DatabaseHandler:
                 )
                 self._conn.commit()
         except sqlite3.Error as e:
+            self.rollback()
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
@@ -143,18 +147,21 @@ class DatabaseHandler:
                 self._conn.execute(query, params)
                 self._conn.commit()
         except sqlite3.Error as e:
+            self.rollback()
             typer.secho(f"Error while adding information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def update_genre(self, genre_id: int, new_info: str):
-#         try:
-#             with self._conn:
-#                 self._conn.execute('''''')
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#
+    def update_genre(self, genre_id: int, new_info: str):
+        try:
+            with self._conn:
+                self._conn.execute('''UPDATE Genre SET GenreName = ? WHERE Genre_ID = ?''', (new_info, genre_id))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            self.rollback()
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+
 #     def list_all_genre(self):
 #         try:
 #             with self._conn:
