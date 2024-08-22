@@ -460,18 +460,18 @@ def check_returned_loan() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def check_overdue_loan() -> None:
-#     """Check which loan is overdue."""
-#     try:
-#         get_database()
-#         loan_list, column_names = lib.overdue_loan()
-#         print_table("Loans that is overdue.", loan_list, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def check_overdue_loan() -> None:
+    """Check which loan is overdue."""
+    try:
+        get_database()
+        loan_list, column_names = lib.overdue_loan()
+        print_table("Loans that is overdue.", loan_list, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 @app.command()
 def search_genre(genre_name: str = typer.Option(..., prompt="Genre name")) -> None:
     """Search if a specific genre exists in the library database."""

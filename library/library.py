@@ -323,14 +323,14 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def overdue_loan(self):
-    #         try:
-    #             loan_list, column_names = self._dbhandler.get_overdue_loan()
-    #             return [loan_list, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def overdue_loan(self):
+        try:
+            loan_list, column_names = self._dbhandler.get_overdue_loan()
+            return [loan_list, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     def search_genre(self, genre_name: str):
         try:
             genre = self._dbhandler.search_genre(genre_name)
