@@ -179,7 +179,8 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_book(self, book_id: int, new_title: str, new_genre_id: int, new_series: str, new_author_id: int, new_status: str):
+    def update_book(self, book_id: int, new_title: str, new_genre_id: int, new_series: str, new_author_id: int,
+                    new_status: str):
         try:
             with self._conn:
                 if new_title != "null":
@@ -203,7 +204,8 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_user(self, user_id: int, new_firstname: str, new_lastname: str, new_address: str, new_email: str, new_phone: str):
+    def update_user(self, user_id: int, new_firstname: str, new_lastname: str, new_address: str, new_email: str,
+                    new_phone: str):
         try:
             with self._conn:
                 if new_firstname != "null":
@@ -227,7 +229,8 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    def update_loan(self, loan_id: int, new_book_id: int, new_user_id: int, new_loandate: str, new_duedate: str, new_returndate: str, new_loanstatus: str):
+    def update_loan(self, loan_id: int, new_book_id: int, new_user_id: int, new_loandate: str, new_duedate: str,
+                    new_returndate: str, new_loanstatus: str):
         try:
             with self._conn:
                 if new_book_id != 0:
@@ -321,91 +324,91 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def get_genre_with_book(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 query = """
-#                             SELECT Genre.GenreName, COUNT(Book.Book_ID) AS BookCount
-#                             FROM Book
-#                             INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
-#                             GROUP BY Genre.GenreName
-#                             ORDER BY BookCount DESC
-#                             LIMIT 1
-#                         """
-#                 cursor.execute(query)
-#                 genre_max = cursor.fetchall()
-#                 query = """
-#                             SELECT Genre.Genre_ID, GenreName, Title
-#                             FROM Genre
-#                             INNER JOIN Book ON Genre.Genre_ID = Book.Genre_ID
-#                             WHERE GenreName = ?
-#                         """
-#                 cursor.execute(query, (genre_max[0][0],))
-#                 author_with_book = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [genre_max, author_with_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_author_with_book(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 query = """
-#                             SELECT Author.FirstName, Author.LastName, COUNT(Book.Book_ID) AS BookCount
-#                             FROM Book
-#                             INNER JOIN Author ON Book.Author_ID = Author.Author_ID
-#                             GROUP BY Author.Author_ID, Author.FirstName, Author.LastName
-#                             ORDER BY BookCount DESC
-#                             LIMIT 1
-#                         """
-#                 cursor.execute(query)
-#                 author_max = cursor.fetchall()
-#                 query = """
-#                             SELECT Author.Author_ID, FirstName, LastName, Title
-#                             FROM Author
-#                             INNER JOIN Book ON Author.Author_ID = Book.Author_ID
-#                             WHERE Author.FirstName = ? AND Author.LastName = ?
-#
-#                         """
-#                 cursor.execute(query, (author_max[0][0], author_max[0][1],))
-#                 author_with_book = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [author_max, author_with_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_series_book(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Book_ID, Title, Series
-#                                 FROM Book
-#                                 WHERE Series IS NOT NULL''')
-#                 book_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_non_series_book(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Book_ID, Title, Series
-#                                 FROM Book
-#                                 WHERE Series IS NULL''')
-#                 book_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    #     def get_genre_with_book(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 query = """
+    #                             SELECT Genre.GenreName, COUNT(Book.Book_ID) AS BookCount
+    #                             FROM Book
+    #                             INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
+    #                             GROUP BY Genre.GenreName
+    #                             ORDER BY BookCount DESC
+    #                             LIMIT 1
+    #                         """
+    #                 cursor.execute(query)
+    #                 genre_max = cursor.fetchall()
+    #                 query = """
+    #                             SELECT Genre.Genre_ID, GenreName, Title
+    #                             FROM Genre
+    #                             INNER JOIN Book ON Genre.Genre_ID = Book.Genre_ID
+    #                             WHERE GenreName = ?
+    #                         """
+    #                 cursor.execute(query, (genre_max[0][0],))
+    #                 author_with_book = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [genre_max, author_with_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_author_with_book(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 query = """
+    #                             SELECT Author.FirstName, Author.LastName, COUNT(Book.Book_ID) AS BookCount
+    #                             FROM Book
+    #                             INNER JOIN Author ON Book.Author_ID = Author.Author_ID
+    #                             GROUP BY Author.Author_ID, Author.FirstName, Author.LastName
+    #                             ORDER BY BookCount DESC
+    #                             LIMIT 1
+    #                         """
+    #                 cursor.execute(query)
+    #                 author_max = cursor.fetchall()
+    #                 query = """
+    #                             SELECT Author.Author_ID, FirstName, LastName, Title
+    #                             FROM Author
+    #                             INNER JOIN Book ON Author.Author_ID = Book.Author_ID
+    #                             WHERE Author.FirstName = ? AND Author.LastName = ?
+    #
+    #                         """
+    #                 cursor.execute(query, (author_max[0][0], author_max[0][1],))
+    #                 author_with_book = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [author_max, author_with_book, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_series_book(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('''SELECT Book_ID, Title, Series
+    #                                 FROM Book
+    #                                 WHERE Series IS NOT NULL''')
+    #                 book_list = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [book_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_non_series_book(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('''SELECT Book_ID, Title, Series
+    #                                 FROM Book
+    #                                 WHERE Series IS NULL''')
+    #                 book_list = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [book_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
     def get_available_book(self):
         try:
             with self._conn:
@@ -434,64 +437,64 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def check_if_available(self, book_title):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('SELECT LoanStatus FROM Book WHERE Title = ?', (book_title,))
-#                 status = cursor.fetchone()
-#                 return status
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_user_with_loan(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, LastName, Book.Title FROM Loan
-#                                 INNER JOIN User ON Loan.User_ID = User.User_ID
-#                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
-#                                 WHERE Loan.LoanStatus = "Not Return" ''')
-#                 user_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [user_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_returned_loan(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Loan_ID, FirstName, LastName, Title, DateReturn, DueDate FROM Loan
-#                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
-#                                 INNER JOIN User ON Loan.User_ID = User.User_ID
-#                                 WHERE Loan.LoanStatus = "Returned"''')
-#                 user_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [user_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
-#     def get_overdue_loan(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, User.LastName, Book.Title, Loan.LoanDate,
-#                                 Loan.DueDate, Loan.LoanStatus
-#                                 FROM Loan
-#                                 INNER JOIN User ON Loan.User_ID = User.User_ID
-#                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
-#                                 WHERE Loan.LoanStatus = "Not Return" AND Loan.DueDate < CURRENT_DATE''')
-#                 loan_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [loan_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    #     def check_if_available(self, book_title):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('SELECT LoanStatus FROM Book WHERE Title = ?', (book_title,))
+    #                 status = cursor.fetchone()
+    #                 return status
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_user_with_loan(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, LastName, Book.Title FROM Loan
+    #                                 INNER JOIN User ON Loan.User_ID = User.User_ID
+    #                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
+    #                                 WHERE Loan.LoanStatus = "Not Return" ''')
+    #                 user_list = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [user_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_returned_loan(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('''SELECT Loan_ID, FirstName, LastName, Title, DateReturn, DueDate FROM Loan
+    #                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
+    #                                 INNER JOIN User ON Loan.User_ID = User.User_ID
+    #                                 WHERE Loan.LoanStatus = "Returned"''')
+    #                 user_list = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [user_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
+    #     def get_overdue_loan(self):
+    #         try:
+    #             with self._conn:
+    #                 cursor = self._conn.cursor()
+    #                 cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, User.LastName, Book.Title, Loan.LoanDate,
+    #                                 Loan.DueDate, Loan.LoanStatus
+    #                                 FROM Loan
+    #                                 INNER JOIN User ON Loan.User_ID = User.User_ID
+    #                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
+    #                                 WHERE Loan.LoanStatus = "Not Return" AND Loan.DueDate < CURRENT_DATE''')
+    #                 loan_list = cursor.fetchall()
+    #                 column_names = [description[0] for description in cursor.description]
+    #                 return [loan_list, column_names]
+    #         except sqlite3.Error as e:
+    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+    #             raise typer.Exit()
+    #
     def search_genre(self, genre_name: str):
         try:
             with self._conn:
@@ -568,24 +571,24 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def search_book_by_author(self, author_id: int):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Book.Book_ID, Book.Title, Book.Series, Genre.GenreName,
-#                                 Author.FirstName, Author.LastName, Book.LoanStatus
-#                                 FROM Book
-#                                 INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
-#                                 INNER JOIN Author ON Book.Author_ID = Author.Author_ID
-#                                 WHERE Book.Author_ID = ?''',
-#                                (author_id,))
-#                 book_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def search_book_by_author(self, author_id: int):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT Book.Book_ID, Book.Title, Book.Series, Genre.GenreName,
+                                Author.FirstName, Author.LastName, Book.LoanStatus
+                                FROM Book
+                                INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
+                                INNER JOIN Author ON Book.Author_ID = Author.Author_ID
+                                WHERE Book.Author_ID = ?''',
+                               (author_id,))
+                book_list = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [book_list, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     def get_genre_id(self, genre_name: str):
         try:
             with self._conn:
@@ -632,15 +635,15 @@ class DatabaseHandler:
         except sqlite3.Error as e:
             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
             raise typer.Exit()
-#
-#     def get_columns_name(self, table_name: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute(f"PRAGMA table_info({table_name})")
-#                 columns = cursor.fetchall()
-#                 column_names = [column[1] for column in columns]
-#                 return column_names
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
+
+    def get_columns_name(self, table_name: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute(f"PRAGMA table_info({table_name})")
+                columns = cursor.fetchall()
+                column_names = [column[1] for column in columns]
+                return column_names
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
