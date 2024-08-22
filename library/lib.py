@@ -208,6 +208,9 @@ def info_author(author_id: int = typer.Option(..., prompt="Author's ID")) -> Non
     try:
         get_database()
         author, column_names = lib.info_author(author_id)
+        if len(author) == 0:
+            typer.secho("Author doesn't exist. Please enter another author's ID.", fg=typer.colors.RED)
+            raise typer.Exit()
         print_table(f"Author details:", author, column_names)
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
@@ -221,7 +224,7 @@ def info_book(book_id: int = typer.Option(..., prompt="Book's ID")) -> None:
         get_database()
         book, column_names = lib.info_book(book_id)
         if len(book) == 0:
-            typer.secho("Book doesn't exist.", fg=typer.colors.RED)
+            typer.secho("Book doesn't exist. Please enter another book's ID.", fg=typer.colors.RED)
             raise typer.Exit()
         print_table(f"Book details:", book, column_names)
     except sqlite3.Error as e:
@@ -236,7 +239,7 @@ def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
         get_database()
         user, column_names = lib.info_user(user_id)
         if len(user) == 0:
-            typer.secho("User doesn't exist.", fg=typer.colors.RED)
+            typer.secho("User doesn't exist. Please enter another user's ID.", fg=typer.colors.RED)
             raise typer.Exit()
         print_table(f"User details:", user, column_names)
     except sqlite3.Error as e:
@@ -251,7 +254,7 @@ def info_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
         get_database()
         loan, column_names = lib.info_loan(loan_id)
         if len(loan) == 0:
-            typer.secho("Loan doesn't exist.", fg=typer.colors.RED)
+            typer.secho("Loan doesn't exist. Please enter another loan's ID.", fg=typer.colors.RED)
             raise typer.Exit()
         print_table(f"Loan details:", loan, column_names)
     except sqlite3.Error as e:
