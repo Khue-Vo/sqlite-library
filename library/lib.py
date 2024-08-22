@@ -345,20 +345,20 @@ def list_all_loan() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def show_genre_with_most_book() -> None:
-#     """Show the genre which have the most books stored in the library database."""
-#     try:
-#         get_database()
-#         genre_name, book_number, genre_with_book, column_names = lib.genre_with_most_book()
-#         print_table(f"\nGenre {genre_name} has the most book in the library: {book_number}", genre_with_book,
-#                     column_names)
-#         typer.secho(f"\nInformation listed successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing genre with the most books from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def show_genre_with_most_book() -> None:
+    """Show the genre which have the most books stored in the library database."""
+    try:
+        get_database()
+        genre_name, book_number, genre_with_book, column_names = lib.genre_with_most_book()
+        print_table(f"\nGenre {genre_name} has the most book in the library: {book_number}", genre_with_book,
+                    column_names)
+        typer.secho(f"\nInformation listed successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing genre with the most books from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def show_author_with_most_book() -> None:
 #     """Show the author which have the most books stored in the library database."""

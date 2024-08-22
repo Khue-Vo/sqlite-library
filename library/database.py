@@ -391,34 +391,34 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def get_genre_with_book(self):
-    #         try:
-    #             with self._conn:
-    #                 cursor = self._conn.cursor()
-    #                 query = """
-    #                             SELECT Genre.GenreName, COUNT(Book.Book_ID) AS BookCount
-    #                             FROM Book
-    #                             INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
-    #                             GROUP BY Genre.GenreName
-    #                             ORDER BY BookCount DESC
-    #                             LIMIT 1
-    #                         """
-    #                 cursor.execute(query)
-    #                 genre_max = cursor.fetchall()
-    #                 query = """
-    #                             SELECT Genre.Genre_ID, GenreName, Title
-    #                             FROM Genre
-    #                             INNER JOIN Book ON Genre.Genre_ID = Book.Genre_ID
-    #                             WHERE GenreName = ?
-    #                         """
-    #                 cursor.execute(query, (genre_max[0][0],))
-    #                 author_with_book = cursor.fetchall()
-    #                 column_names = [description[0] for description in cursor.description]
-    #                 return [genre_max, author_with_book, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def get_genre_with_book(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                query = """
+                            SELECT Genre.GenreName, COUNT(Book.Book_ID) AS BookCount
+                            FROM Book
+                            INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
+                            GROUP BY Genre.GenreName
+                            ORDER BY BookCount DESC
+                            LIMIT 1
+                        """
+                cursor.execute(query)
+                genre_max = cursor.fetchall()
+                query = """
+                            SELECT Genre.Genre_ID, GenreName, Title
+                            FROM Genre
+                            INNER JOIN Book ON Genre.Genre_ID = Book.Genre_ID
+                            WHERE GenreName = ?
+                        """
+                cursor.execute(query, (genre_max[0][0],))
+                author_with_book = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [genre_max, author_with_book, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def get_author_with_book(self):
     #         try:
     #             with self._conn:
