@@ -348,15 +348,15 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def search_book_by_genre(self, genre_name: str):
-    #         try:
-    #             genre_id = self.get_genre_id(genre_name)
-    #             book_list, column_names = self._dbhandler.search_book_by_genre(genre_id)
-    #             return [book_list, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+        def search_book_by_genre(self, genre_name: str):
+            try:
+                genre_id = self.get_genre_id(genre_name)
+                book_list, column_names = self._dbhandler.search_book_by_genre(genre_id)
+                return [book_list, column_names]
+            except sqlite3.Error as e:
+                typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+                raise typer.Exit()
+
     #     def search_book_by_author(self, author_name: str):
     #         try:
     #             first_name, last_name = author_name.split(maxsplit=1)

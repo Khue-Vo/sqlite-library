@@ -550,24 +550,24 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def search_book_by_genre(self, genre_id: int):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT Book.Book_ID, Book.Title, Book.Series, Genre.GenreName,
-#                                 Author.FirstName, Author.LastName, Book.LoanStatus
-#                                 FROM Book
-#                                 INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
-#                                 INNER JOIN Author ON Book.Author_ID = Author.Author_ID
-#                                 WHERE Book.Genre_ID = ?''',
-#                                (genre_id,))
-#                 book_list = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [book_list, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def search_book_by_genre(self, genre_id: int):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT Book.Book_ID, Book.Title, Book.Series, Genre.GenreName,
+                                Author.FirstName, Author.LastName, Book.LoanStatus
+                                FROM Book
+                                INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
+                                INNER JOIN Author ON Book.Author_ID = Author.Author_ID
+                                WHERE Book.Genre_ID = ?''',
+                               (genre_id,))
+                book_list = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [book_list, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def search_book_by_author(self, author_id: int):
 #         try:
 #             with self._conn:

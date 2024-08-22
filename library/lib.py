@@ -487,18 +487,18 @@ def search_loan(user_name: str = typer.Option(..., prompt="User's name"),
         raise typer.Exit()
 
 
-# @app.command()
-# def search_by_genre(genre: str = typer.Option(..., prompt="Genre's name")) -> None:
-#     """List books within a specific genre in the library database."""
-#     try:
-#         get_database()
-#         book_list, column_names = lib.search_book_by_genre(genre)
-#         print_table(f"Books under genre {genre} are:", book_list, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def search_by_genre(genre: str = typer.Option(..., prompt="Genre's name")) -> None:
+    """List books within a specific genre in the library database."""
+    try:
+        get_database()
+        book_list, column_names = lib.search_book_by_genre(genre)
+        print_table(f"Books under genre {genre} are:", book_list, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def search_by_author(author: str = typer.Option(..., prompt="Author's name")) -> None:
 #     """List books within a specific author in the library database."""
