@@ -179,14 +179,14 @@ class Library:
                 typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
                 raise typer.Exit()
 
-    #     def list_all_book(self):
-    #         try:
-    #             all_book, column_names = self._dbhandler.list_all_book()
-    #             return [all_book, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+        def list_all_book(self):
+            try:
+                all_book, column_names = self._dbhandler.list_all_book()
+                return [all_book, column_names]
+            except sqlite3.Error as e:
+                typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+                raise typer.Exit()
+
     #     def list_all_user(self):
     #         try:
     #             all_user = self._dbhandler.list_all_user()

@@ -236,22 +236,22 @@ def list_all_author() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def list_all_book() -> None:
-#     """Show all books within the library database."""
-#     try:
-#         get_database()
-#         all_book, column_name = lib.list_all_book()
-#         if len(all_book) == 0:
-#             typer.secho("There are no book in the table yet. Please add one first.", fg=typer.colors.RED)
-#             raise typer.Exit()
-#         print_table("Book", all_book, column_name)
-#         typer.secho(f"\nBook table listed successfully.", fg=typer.colors.GREEN)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing books from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def list_all_book() -> None:
+    """Show all books within the library database."""
+    try:
+        get_database()
+        all_book, column_name = lib.list_all_book()
+        if len(all_book) == 0:
+            typer.secho("There are no book in the table yet. Please add one first.", fg=typer.colors.RED)
+            raise typer.Exit()
+        print_table("Book", all_book, column_name)
+        typer.secho(f"\nBook table listed successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing books from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def list_all_user() -> None:
 #     """Show all users within the library database."""

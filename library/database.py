@@ -276,23 +276,23 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-#     def list_all_book(self):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''
-#                                 SELECT Book_ID, Title, Series, FirstName, LastName, GenreName
-#                                 FROM Book
-#                                 INNER JOIN Author ON Book.Author_ID = Author.Author_ID
-#                                 INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
-#                                 ''')
-#                 all_book = cursor.fetchall()
-#                 column_names = [description[0] for description in cursor.description]
-#                 return [all_book, column_names]
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def list_all_book(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''
+                                SELECT Book_ID, Title, Series, FirstName, LastName, GenreName
+                                FROM Book
+                                INNER JOIN Author ON Book.Author_ID = Author.Author_ID
+                                INNER JOIN Genre ON Book.Genre_ID = Genre.Genre_ID
+                                ''')
+                all_book = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [all_book, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def list_all_user(self):
 #         try:
 #             with self._conn:
