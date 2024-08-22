@@ -156,18 +156,23 @@ def update_book(book_id: int = typer.Option(..., prompt="Book's ID"),
         raise typer.Exit()
 
 
-# @app.command()
-# def update_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
-#     """Update the chosen user information in the library database."""
-#     try:
-#         get_database()
-#
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while updating user: {e}.", fg=typer.colors.RED)
-#         lib.rollback()
-#         raise typer.Exit()
-#
-#
+@app.command()
+def update_user(user_id: int = typer.Option(..., prompt="User's ID"),
+                new_name: str = typer.Option(..., prompt="Last name"),
+                new_address: str = typer.Option(..., prompt="Address"),
+                new_email: str = typer.Option(..., prompt="Email"),
+                new_phone: str = typer.Option(..., prompt="Phone Number")
+                ) -> None:
+    """Update the chosen user information in the library database."""
+    try:
+        get_database()
+        lib.update_user(user_id, new_name, new_address, new_email, new_phone)
+        typer.secho(f"User updated successfully.", fg=typer.colors.GREEN)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while updating user: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def update_loan(loan_id: int = typer.Option(..., prompt="Loan's ID")) -> None:
 #     """Update the chosen loan information in the library database."""

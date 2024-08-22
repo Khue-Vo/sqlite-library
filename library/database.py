@@ -203,6 +203,31 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
+    def update_user(self, user_id: int, new_firstname: str, new_lastname: str, new_address: str, new_email: str, new_phone: str):
+        try:
+            with self._conn:
+                if new_firstname != "null":
+                    self._conn.execute('''UPDATE User SET FirstName = ? WHERE User_ID = ?''',
+                                       (new_firstname, user_id))
+                if new_lastname != "null":
+                    self._conn.execute('''UPDATE User SET LastName = ? WHERE User_ID = ?''',
+                                       (new_lastname, user_id))
+                if new_address != "null":
+                    self._conn.execute('''UPDATE User SET Address = ? WHERE User_ID = ?''',
+                                       (new_address, user_id))
+                if new_email != "null":
+                    self._conn.execute('''UPDATE User SET Email = ? WHERE User_ID = ?''',
+                                       (new_email, user_id))
+                if new_phone != "null":
+                    self._conn.execute('''UPDATE User SET PhoneNumber = ? WHERE User_ID = ?''',
+                                       (new_phone, user_id))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            self.rollback()
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
+
 
 #     def list_all_genre(self):
 #         try:

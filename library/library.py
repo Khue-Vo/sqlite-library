@@ -107,6 +107,28 @@ class Library:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
+    def update_user(self, user_id: int, new_name: str, new_address: str, new_email: str, new_phone: str):
+        try:
+            if new_name == "null" or new_name == "Null" or new_name == "none" or new_name == "None":
+                new_firstname = "null"
+                new_lastname = "null"
+            else:
+                new_firstname, new_lastname = new_name.split(maxsplit=1)
+
+            if new_address == "null" or new_address == "Null" or new_address == "none" or new_address == "None":
+                new_address = "null"
+
+            if new_email == "null" or new_email == "Null" or new_email == "none" or new_email == "None":
+                new_email = "null"
+
+            if new_phone == "null" or new_phone == "Null" or new_phone == "none" or new_phone == "None":
+                new_phone = "null"
+
+            self._dbhandler.update_user(user_id, new_firstname, new_lastname, new_address, new_email, new_phone)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #
 #     def list_all_genre(self):
 #         try:
