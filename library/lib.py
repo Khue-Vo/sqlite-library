@@ -436,18 +436,18 @@ def check_available_book(title: str = typer.Option(..., prompt="Title")) -> None
         raise typer.Exit()
 
 
-# @app.command()
-# def check_user_with_loan() -> None:
-#     """Check which user is currently borrowing books from the library."""
-#     try:
-#         get_database()
-#         user_with_loan, column_names = lib.user_with_loan()
-#         print_table(f"The users which are currently borrowing books from library:", user_with_loan, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking user's loan status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def check_user_with_loan() -> None:
+    """Check which user is currently borrowing books from the library."""
+    try:
+        get_database()
+        user_with_loan, column_names = lib.user_with_loan()
+        print_table(f"The users which are currently borrowing books from library:", user_with_loan, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking user's loan status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def check_returned_loan() -> None:
 #     """Check which loan is returned."""

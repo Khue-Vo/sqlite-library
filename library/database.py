@@ -515,21 +515,21 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def get_user_with_loan(self):
-    #         try:
-    #             with self._conn:
-    #                 cursor = self._conn.cursor()
-    #                 cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, LastName, Book.Title FROM Loan
-    #                                 INNER JOIN User ON Loan.User_ID = User.User_ID
-    #                                 INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
-    #                                 WHERE Loan.LoanStatus = "Not Return" ''')
-    #                 user_list = cursor.fetchall()
-    #                 column_names = [description[0] for description in cursor.description]
-    #                 return [user_list, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def get_user_with_loan(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT Loan.Loan_ID, User.FirstName, LastName, Book.Title FROM Loan
+                                INNER JOIN User ON Loan.User_ID = User.User_ID
+                                INNER JOIN Book ON Loan.Book_ID = Book.Book_ID
+                                WHERE Loan.LoanStatus = "Not Return" ''')
+                user_list = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [user_list, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def get_returned_loan(self):
     #         try:
     #             with self._conn:
