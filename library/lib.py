@@ -220,6 +220,9 @@ def info_book(book_id: int = typer.Option(..., prompt="Book's ID")) -> None:
     try:
         get_database()
         book, column_names = lib.info_book(book_id)
+        if len(book) == 0:
+            typer.secho("Loan doesn't exist.", fg=typer.colors.RED)
+            raise typer.Exit()
         print_table(f"Book details:", book, column_names)
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
