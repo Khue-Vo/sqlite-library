@@ -348,18 +348,18 @@ def list_available_book() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def list_non_available_book() -> None:
-#     """List the books that are not available for loan in the library database."""
-#     try:
-#         get_database()
-#         non_available_book, column_names = lib.non_available_books_for_loan()
-#         print_table("Non-available book(s) for loan", non_available_book, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing non-available books from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def list_non_available_book() -> None:
+    """List the books that are not available for loan in the library database."""
+    try:
+        get_database()
+        non_available_book, column_names = lib.non_available_books_for_loan()
+        print_table("Non-available book(s) for loan", non_available_book, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing non-available books from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def check_available_book(title: str = typer.Option(..., prompt="Title")) -> None:
 #     """Check if a specific book is available for loan or not."""
