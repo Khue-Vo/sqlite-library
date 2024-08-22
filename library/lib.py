@@ -232,6 +232,9 @@ def info_user(user_id: int = typer.Option(..., prompt="User's ID")) -> None:
     try:
         get_database()
         user, column_names = lib.info_user(user_id)
+        if len(user) == 0:
+            typer.secho("User doesn't exist.", fg=typer.colors.RED)
+            raise typer.Exit()
         print_table(f"User details:", user, column_names)
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
