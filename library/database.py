@@ -179,6 +179,30 @@ class DatabaseHandler:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
+    def update_book(self, book_id: int, new_title: str, new_genre_id: int, new_series: str, new_author_id: int, new_status: str):
+        try:
+            with self._conn:
+                if new_title != "null":
+                    self._conn.execute('''UPDATE Book SET Title = ? WHERE Book_ID = ?''',
+                                       (new_title, book_id))
+                if new_genre_id != 0:
+                    self._conn.execute('''UPDATE Book SET Genre_ID = ? WHERE Book_ID = ?''',
+                                       (new_genre_id, book_id))
+                if new_series != "null":
+                    self._conn.execute('''UPDATE Book SET Series = ? WHERE Book_ID = ?''',
+                                       (new_series, book_id))
+                if new_author_id != 0:
+                    self._conn.execute('''UPDATE Book SET Author_ID = ? WHERE Book_ID = ?''',
+                                       (new_author_id, book_id))
+                if new_status != "null":
+                    self._conn.execute('''UPDATE Book SET LoanStatus = ? WHERE Book_ID = ?''',
+                                       (new_status, book_id))
+                self._conn.commit()
+        except sqlite3.Error as e:
+            self.rollback()
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 
 #     def list_all_genre(self):
 #         try:

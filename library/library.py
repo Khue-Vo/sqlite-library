@@ -80,6 +80,33 @@ class Library:
             typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
+    def update_book(self, book_id: int, new_title: str, new_genre: str, new_series: str, new_author: str, new_status: str):
+        try:
+            if new_title == "null" or new_title == "Null" or new_title == "none" or new_title == "None":
+                new_title = "null"
+
+            if new_genre == "null" or new_genre == "Null" or new_genre == "none" or new_genre == "None":
+                new_genre_id = 0
+            else:
+                new_genre_id = self.get_genre_id(new_genre)
+
+            if new_series == "null" or new_series == "Null" or new_series == "none" or new_series == "None":
+                new_series = "null"
+
+            if new_author == "null" or new_author == "Null" or new_author == "none" or new_author == "None":
+                new_author_id = 0
+            else:
+                first_name, last_name = new_author.split(maxsplit=1)
+                new_author_id = self.get_author_id(first_name, last_name)
+
+            if new_status == "null" or new_status == "Null" or new_status == "none" or new_status == "None":
+                new_status = "null"
+
+            self._dbhandler.update_book(book_id, new_title, new_genre_id, new_series, new_author_id, new_status)
+        except sqlite3.Error as e:
+            typer.secho(f"Error while updating information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #
 #     def list_all_genre(self):
 #         try:
