@@ -426,21 +426,21 @@ def search_genre(genre_name: str = typer.Option(..., prompt="Genre name")) -> No
         raise typer.Exit()
 
 
-# @app.command()
-# def search_author(author_name: str = typer.Option(..., prompt="Author name")) -> None:
-#     """Search if a specific author exists in the library database."""
-#     try:
-#         get_database()
-#         exist = lib.search_author(author_name)
-#         if exist:
-#             typer.secho("Author does exist.", fg=typer.colors.GREEN)
-#         else:
-#             typer.secho("Author doesn't exist. Please enter another author's name.", fg=typer.colors.RED)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def search_author(author_name: str = typer.Option(..., prompt="Author name")) -> None:
+    """Search if a specific author exists in the library database."""
+    try:
+        get_database()
+        exist = lib.search_author(author_name)
+        if exist:
+            typer.secho("Author does exist.", fg=typer.colors.GREEN)
+        else:
+            typer.secho("Author doesn't exist. Please enter another author's name.", fg=typer.colors.RED)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while checking loan's status: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def search_book(book_title: str = typer.Option(..., prompt="Book title")) -> None:
 #     """Search if a specific book exists in the library database."""
