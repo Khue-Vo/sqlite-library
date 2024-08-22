@@ -196,6 +196,9 @@ def info_genre(genre_id: int = typer.Option(..., prompt="Genre's ID")) -> None:
     try:
         get_database()
         genre, column_names = lib.info_genre(genre_id)
+        if len(genre) == 0:
+            typer.secho("Genre doesn't exist. Please enter another genre's ID.", fg=typer.colors.RED)
+            raise typer.Exit()
         print_table(f"Genre details:", genre, column_names)
     except sqlite3.Error as e:
         typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
