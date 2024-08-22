@@ -373,18 +373,18 @@ def show_author_with_most_book() -> None:
         raise typer.Exit()
 
 
-# @app.command()
-# def show_book_in_series() -> None:
-#     """List the books which belongs to a series in the library database."""
-#     try:
-#         get_database()
-#         series_book, column_names = lib.book_in_series()
-#         print_table("Series books", series_book, column_names)
-#     except sqlite3.Error as e:
-#         typer.secho(f"Error while listing series books from the database: {e}.", fg=typer.colors.RED)
-#         raise typer.Exit()
-#
-#
+@app.command()
+def show_book_in_series() -> None:
+    """List the books which belongs to a series in the library database."""
+    try:
+        get_database()
+        series_book, column_names = lib.book_in_series()
+        print_table("Series books", series_book, column_names)
+    except sqlite3.Error as e:
+        typer.secho(f"Error while listing series books from the database: {e}.", fg=typer.colors.RED)
+        raise typer.Exit()
+
+
 # @app.command()
 # def show_book_not_in_series() -> None:
 #     """List the books which does not belong to a series in the library database."""

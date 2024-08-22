@@ -448,20 +448,20 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def get_series_book(self):
-    #         try:
-    #             with self._conn:
-    #                 cursor = self._conn.cursor()
-    #                 cursor.execute('''SELECT Book_ID, Title, Series
-    #                                 FROM Book
-    #                                 WHERE Series IS NOT NULL''')
-    #                 book_list = cursor.fetchall()
-    #                 column_names = [description[0] for description in cursor.description]
-    #                 return [book_list, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def get_series_book(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT Book_ID, Title, Series
+                                FROM Book
+                                WHERE Series IS NOT NULL''')
+                book_list = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [book_list, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def get_non_series_book(self):
     #         try:
     #             with self._conn:
