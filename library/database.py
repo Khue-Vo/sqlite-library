@@ -492,17 +492,17 @@ class DatabaseHandler:
 #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
 #             raise typer.Exit()
 #
-#     def search_genre(self, genre_name: str):
-#         try:
-#             with self._conn:
-#                 cursor = self._conn.cursor()
-#                 cursor.execute('''SELECT GenreName FROM Genre WHERE GenreName = ?''', (genre_name,))
-#                 if_exist = cursor.fetchone()
-#                 return if_exist
-#         except sqlite3.Error as e:
-#             typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
-#             raise typer.Exit()
-#
+    def search_genre(self, genre_name: str):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                cursor.execute('''SELECT GenreName FROM Genre WHERE GenreName = ?''', (genre_name,))
+                if_exist = cursor.fetchone()
+                return if_exist
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking id: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
 #     def search_author(self, first_name: str, last_name: str):
 #         try:
 #             with self._conn:
