@@ -257,16 +257,16 @@ class Library:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def author_with_most_book(self):
-    #         try:
-    #             author_max, author_with_book, column_names = self._dbhandler.get_author_with_book()
-    #             author_name = author_max[0][0] + " " + author_max[0][1]
-    #             book_number = author_max[0][2]
-    #             return [author_name, book_number, author_with_book, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def author_with_most_book(self):
+        try:
+            author_max, author_with_book, column_names = self._dbhandler.get_author_with_book()
+            author_name = author_max[0][0] + " " + author_max[0][1]
+            book_number = author_max[0][2]
+            return [author_name, book_number, author_with_book, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def book_in_series(self):
     #         try:
     #             series_book, column_names = self._dbhandler.get_series_book()

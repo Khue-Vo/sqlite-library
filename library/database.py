@@ -419,35 +419,35 @@ class DatabaseHandler:
             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
             raise typer.Exit()
 
-    #     def get_author_with_book(self):
-    #         try:
-    #             with self._conn:
-    #                 cursor = self._conn.cursor()
-    #                 query = """
-    #                             SELECT Author.FirstName, Author.LastName, COUNT(Book.Book_ID) AS BookCount
-    #                             FROM Book
-    #                             INNER JOIN Author ON Book.Author_ID = Author.Author_ID
-    #                             GROUP BY Author.Author_ID, Author.FirstName, Author.LastName
-    #                             ORDER BY BookCount DESC
-    #                             LIMIT 1
-    #                         """
-    #                 cursor.execute(query)
-    #                 author_max = cursor.fetchall()
-    #                 query = """
-    #                             SELECT Author.Author_ID, FirstName, LastName, Title
-    #                             FROM Author
-    #                             INNER JOIN Book ON Author.Author_ID = Book.Author_ID
-    #                             WHERE Author.FirstName = ? AND Author.LastName = ?
-    #
-    #                         """
-    #                 cursor.execute(query, (author_max[0][0], author_max[0][1],))
-    #                 author_with_book = cursor.fetchall()
-    #                 column_names = [description[0] for description in cursor.description]
-    #                 return [author_max, author_with_book, column_names]
-    #         except sqlite3.Error as e:
-    #             typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
-    #             raise typer.Exit()
-    #
+    def get_author_with_book(self):
+        try:
+            with self._conn:
+                cursor = self._conn.cursor()
+                query = """
+                            SELECT Author.FirstName, Author.LastName, COUNT(Book.Book_ID) AS BookCount
+                            FROM Book
+                            INNER JOIN Author ON Book.Author_ID = Author.Author_ID
+                            GROUP BY Author.Author_ID, Author.FirstName, Author.LastName
+                            ORDER BY BookCount DESC
+                            LIMIT 1
+                        """
+                cursor.execute(query)
+                author_max = cursor.fetchall()
+                query = """
+                            SELECT Author.Author_ID, FirstName, LastName, Title
+                            FROM Author
+                            INNER JOIN Book ON Author.Author_ID = Book.Author_ID
+                            WHERE Author.FirstName = ? AND Author.LastName = ?
+
+                        """
+                cursor.execute(query, (author_max[0][0], author_max[0][1],))
+                author_with_book = cursor.fetchall()
+                column_names = [description[0] for description in cursor.description]
+                return [author_max, author_with_book, column_names]
+        except sqlite3.Error as e:
+            typer.secho(f"Error while invoking information: {e}", fg=typer.colors.RED)
+            raise typer.Exit()
+
     #     def get_series_book(self):
     #         try:
     #             with self._conn:
